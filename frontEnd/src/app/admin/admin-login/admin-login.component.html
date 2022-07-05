@@ -1,0 +1,31 @@
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="pills-login" role="tabpanel">
+        <ul class="nav mb-3" size="10" id="ex1">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" id="tab-login" style="background-color:green;color: white;margin-left: 330px;" role="tab" aria-selected="true">Admin Login</a>
+            </li>
+          </ul>
+      <form  #userForm="ngForm">
+
+        <div class="form-outline mb-4">
+          <label class="form-label" for="loginName">UserName</label>
+          <input type="text" id="loginName" #name="ngModel" class="form-control" required
+          [class.is-invalid]="name.invalid && name.touched"  name="name" [(ngModel)]="userModel.name" />
+          <small class="text-danger" [class.d-none]="name.valid || name.untouched">UserName is required</small>
+          
+        </div>
+ 
+        <div class="form-outline mb-4">
+          <label class="form-label" for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" #password="ngModel" class="form-control" required
+          [class.is-invalid]="password.invalid && password.touched" name="password" [(ngModel)]="userModel.password" />
+          <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required</small>
+          
+        </div>
+  
+      
+        <button type="submit" mat-stroked-button size="10"  style="background-color:green;color: white;margin-left: 350px;" [disabled]="userForm.form.invalid" class="btn mb-4" (click)="adminAccess(userForm)" routerLink="../productlist">Sign in</button>
+    
+      </form>
+    </div>
+  </div>
