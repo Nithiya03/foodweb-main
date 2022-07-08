@@ -1,8 +1,7 @@
 import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NgForm } from '@angular/forms';
-import { map, pipe } from 'rxjs';
-import { User } from '../pages/register/user1';
+import { FormGroup, NgForm } from '@angular/forms';
+import { order } from '../pages/menupage/order';
 
 
 @Injectable({
@@ -42,20 +41,13 @@ export class OrderDetailsService{
     return data;
   }
 
-  accesslogin(userForm:NgForm){
+  postUserDetail(userForm:NgForm){
     return this.http.post(this.baseURLuser,userForm);
   }
-
-  access(userForm:NgForm){
-    console.log("userForm "+userForm.value)
-    const data = JSON.stringify(userForm.value)
-   let userArray:any;
-   if(localStorage.getItem('user')){
-     userArray=localStorage.getItem('user');
-     console.log("userArray "+userArray)
-   } 
-   return userArray
+  postloginDetail(userForm:NgForm){
+    return this.http.get(this.baseURLuser+`/login`)
   }
+
 
   checkAccess(){
     if(localStorage.getItem('user1')){
@@ -74,18 +66,5 @@ export class OrderDetailsService{
     return this.role;
   }
 
-  postProduct(data:any){
-    return this.http.post<any>("http://localhost:3000/productList/",data)
-  }
 
-  getProduct(){
-    return this.http.get<any>("http://localhost:3000/productList/")
-  }
-  putProduct(data:any, id: number){
-    return this.http.put<any>("http://localhost:3000/productList/"+id,data)
-  }
-
-  deleteProduct(id:number){
-    return this.http.delete<any>("http://localhost:3000/productList/"+id)
-  }
 }

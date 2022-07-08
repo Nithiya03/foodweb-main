@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
-import { OrderDetailsService } from 'src/app/services/order-details.service';
 import { ProductList } from '../addproduct/productlist'
 @Component({
   selector: 'app-addproduct',
@@ -17,6 +16,10 @@ export class AddproductComponent implements OnInit {
   adminForm!:FormGroup;
   getMenuId: any;
 
+  adminArray:ProductList[] =[]
+  actionbtn!:string;
+  _id!:string;
+
   constructor(private adminService:AdminServiceService,private fb:FormBuilder,private router:Router,private route: ActivatedRoute) { 
     this.adminForm = this.fb.group({
       foodName : new FormControl('',[Validators.required]),
@@ -27,14 +30,41 @@ export class AddproductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getMenuId = this.route.snapshot.paramMap.get('id');
+    this._id = this.adminService.getId
+    this.adminService.getproductData(this._id).subscribe(
+      (res:any)=>this.editProduct(res),
+      
+      (err:any)=>console.log(err)
+    )
   }
 
+  editProduct(product : ProductList ){
+
+    this.adminForm.patchValue({
+      foodName:product.foodName,
+      foodDetail:product.foodDetail,
+      foodPrice:product.foodPrice,
+      foodImage:product.foodImage
+    })
+    }
+
   add(userForm:FormGroup){
-    console.log(userForm.value)
-    this.adminService.addProduct(userForm.value).subscribe((res)=>{
-      console.log("register"+res); 
-    });
+    console.log("Addproduct"+userForm.value + "id" +this._id)
+    if(!this._id){
+      this.adminService.addProduct(userForm.value).subscribe((res)=>{
+        console.log("post"+res)
+        alert("product added successfully");
+      })
+    }
+    else{
+      this.adminService.updateProduct(this._id,userForm.value).subscribe((res)=>{
+        console.log("update"+res)
+        alert("product updated successfully")
+      })
+    }
+    
   }
+
+
 
 }

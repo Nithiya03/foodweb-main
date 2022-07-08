@@ -2,7 +2,7 @@ const express = require('express');
 
 var router = express.Router();
 
-var ObjectId = require('mongoose').Types.ObjectId;
+// var ObjectId = require('mongoose').Types.ObjectId;
 
 var { User } = require('../models/user')
 
@@ -28,7 +28,6 @@ router.post('/',(req,res)=>{
     });
     user.save((err,doc)=> {
         if(!err){
-            console.log("doc"+doc)
             res.send(doc);
         }
         else{
@@ -36,6 +35,22 @@ router.post('/',(req,res)=>{
         }
     })
 });
+
+router.get('/login',(req,res)=>{
+    var user = new User({
+        email: req.body.email,
+        password : req.body.password
+    });
+    user.save((err,doc)=> {
+        if(!err){
+            res.send(doc);
+        }
+        else{
+            console.log('Error in Retriving Employees :'+JSON.stringify(err));
+        }
+    })
+});
+
 
 module.exports = router;
 

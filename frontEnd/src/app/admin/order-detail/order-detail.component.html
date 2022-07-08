@@ -1,1 +1,27 @@
-<p>order-detail works!</p>
+<div>
+    <table class="table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th >UserName</th>
+          <th >Mobile</th>
+          <th >Address</th>
+          <th >Quantity</th>
+          <th >Total</th>
+          <th >FoodName</th>
+          <th >Payment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of orderData">
+          <td>{{u.name}}</td>
+          <td>{{u.phone}}</td>
+          <td>{{u.address}}</td>
+          <td>{{u.quantity}}</td>
+          <td>{{u.total}}</td>
+          <td>{{u.foodName}}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

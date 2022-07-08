@@ -1,12 +1,12 @@
 
-<div class="row float-right mr-2 mt-2">
+<div class="row float-right mt-2 mr-2 mb-2">
   <div class="col-xs-12">
-    <button class="btn btn-primary" (click)="add()">Add New Product</button>
+    <button class="btn btn-primary" routerLink="/addproduct">Add New Product</button>
   </div>
 </div>
 
 <div>
-  <table class="table table-bordered mt-3 p-3">
+  <table class="table table-bordered mt-3">
     <thead>
       <tr>
         <th >FoodName</th>
@@ -23,10 +23,10 @@
         <td>{{u.foodPrice}}</td>
         <td>{{u.foodImage}}</td>
         <td> 
-          <button mat-icon-button color="primary" [routerLink]="['/update/',u._id]">
+          <button mat-icon-button color="primary" [routerLink]="['/update',u._id]" (click)="doUpdate(u._id)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn">
+          <button mat-icon-button color="warn" (click)="doDelete(u._id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

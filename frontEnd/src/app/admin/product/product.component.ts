@@ -15,14 +15,21 @@ export class ProductComponent implements OnInit {
     this.getData();
   }
 
-  add(){
-    this.router.navigate(['addproduct']);
-  }
-
   getData(){
     this.adminService.getProduct().subscribe((res)=>{
-      console.log("getdata"+JSON.stringify(res))
       this.product = res
     });
+  }
+  doUpdate(_id : string){
+    this.adminService.setId = _id
+  }
+  doDelete(_id:string){
+    if (confirm('Are you sure to delete this record ?') == true) {
+
+      this.adminService.deleteProduct(_id).subscribe((res) => {
+        console.log(res)
+      });
+      
+      }
   }
 }

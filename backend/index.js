@@ -13,7 +13,6 @@ app.use(cors({origin:'http://localhost:4200'}))
 app.use('/users',userController)
 app.use('/admins',adminController)
 
-
 app.listen(3000,()=> console.log('server started at port : 3000'));
 
 

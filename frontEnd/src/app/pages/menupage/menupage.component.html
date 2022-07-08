@@ -20,27 +20,25 @@
                       <a class="nav-link active" id="tab-login" role="tab" style="color: #fff;" aria-selected="true">Enter Your Details</a>
                     </li>
                   </ul>
-                <form #userForm="ngForm" novalidate>
+                <form [formGroup]="menuForm" novalidate>
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                   <label class="form-label" for="name">Enter Your FullName</label>
-                  <input type="text" id="name"  size="50" #name="ngModel" class="form-control" [class.is-invalid]="name.invalid && name.touched" name="name" [(ngModel)]="userModel.name" requiredid="registerName"  />
-                  <small class="text-danger" [class.d-none]="name.valid || name.untouched">UserName is required</small>
+                  <input type="text" id="name" class="form-control" size="50" formControlName="name"  size="50" name="name" requiredid="registerName"  />
+                  <small class="text-danger" >UserName is required</small>
                 </div>
 
                 <div class="form-outline mb-4">
                   <label class="form-label" for="number">Enter Your Mobile</label>
-                  <input type="text" id="number"  size="50" #phone="ngModel" pattern="^\d{10}$" class="form-control" required
-                  [class.is-invalid]="phone.invalid && phone.touched" name="phone" [(ngModel)]="userModel.mobile"/>
-                  <small class="text-danger" [class.d-none]="phone.valid || phone.untouched">PhoneNumber is required</small>
+                  <input type="text" id="number" class="form-control" size="50"  formControlName="phone" pattern="^\d{10}$"  required  name="phone" />
+                  <small class="text-danger">PhoneNumber is required</small>
                 </div>
 
                 <div class="form-outline mb-4">
                   <label class="form-label" for="Address">Enter Your Address</label>
-                    <textarea id="Address" size="50" class="form-control" size="50" required #address="ngModel"[class.is-invalid]="address.invalid && address.touched" name="address" [(ngModel)]="userModel.address"></textarea>
-                    <small class="text-danger" [class.d-none]="address.valid || address.untouched">Address is required</small>
-                  </div>
-                  
+                    <textarea id="Address" class="form-control" size="50" formControlName="address" name="address" required></textarea>
+                    <small class="text-danger">Address is required</small>
+                </div>
                   <div class="form-outline mb-4">
                     <label class="form-label" for="quantity">Quantity</label><br>
                     <button type="button" (click)="decrease()"><i class="bi bi-dash"></i></button>&nbsp;
@@ -50,10 +48,11 @@
     
                   <div class="form-outline mb-4" *ngIf="menuData">
                     <label class="form-label" for="price">Price</label><br>
-                    {{menuData.foodPrice * quantity | currency:'INR'}}
+                    <input #menuData.foodPrice*quantity  class="form-control" size="50"  [value]="menuData.foodPrice*quantity">
                   </div>
+      
 
-                <button class="buybtn" [disabled]="userForm.form.invalid"  *ngIf="orderChoice"  (click)="orderDetail()"  routerLink="../../order">Place Order</button> 
+                <button class="buybtn" [disabled]="menuForm.invalid"  *ngIf="orderChoice"  (click)="orderDetail()"  routerLink="../../order" (click)="productData(menuForm,quantity,menuData.foodPrice*quantity)">PlaceOrder</button> 
                   
               </form>
 

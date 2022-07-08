@@ -8,6 +8,7 @@ import { OrderDetailsService } from 'src/app/services/order-details.service';
 })
 export class NavbarComponent implements OnInit {
   accessLogin :string ="";
+  accessdata!:string;
   constructor(private service:OrderDetailsService) { }
 
   ngOnInit(): void {
@@ -28,7 +29,9 @@ export class NavbarComponent implements OnInit {
 
   accessuser(){
     this.accessLogin=this.service.getUser
-    if(this.accessLogin == 'user'){
+    this.accessdata = this.accessLogin
+    console.log("access"+this.accessdata)
+    if(this.accessdata == 'user'){
       return true;
     }
     else{
@@ -38,7 +41,8 @@ export class NavbarComponent implements OnInit {
 
   accessadmin(){
     this.accessLogin=this.service.getUser
-    if(this.accessLogin == 'admin'){
+    this.accessdata = this.accessLogin
+    if(this.accessdata == 'admin'){
       return true;
     }
     else{

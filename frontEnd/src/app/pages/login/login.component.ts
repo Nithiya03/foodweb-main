@@ -17,19 +17,12 @@ export class LoginComponent implements OnInit {
   constructor(private router:Router,private service:OrderDetailsService,private snackBar:MatSnackBar){}
   ngOnInit(): void {
   }
-  accessHome(userForm:NgForm){
-    localStorage.setItem('user1',JSON.stringify(userForm.value))
-    this.user=this.service.access(userForm.value)
-    if(this.user){
-     window.alert("Login Successful")
-      // this.snackBar.open("Login Successful")
-      this.router.navigate(['/menu'])
-    }
-    else{
-      window.alert("Login Not Successful")
-      // this.snackBar.open("Login Not Successful")
-      this.router.navigate(['/login'])
-    }
+
+  login(userForm:NgForm){
+    this.service.postloginDetail(userForm.value).subscribe((res)=>{
+      console.log(res)
+    })
+    this.router.navigate(['/menu'])
   }
 }
 
