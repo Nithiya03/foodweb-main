@@ -2,8 +2,6 @@ import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, NgForm } from '@angular/forms';
 import { order } from '../pages/menupage/order';
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -37,26 +35,24 @@ export class OrderDetailsService{
 
   }
   authlog(){
-    const data = localStorage.getItem('user1')
+    const data = localStorage.getItem('token')
     return data;
   }
 
   postUserDetail(userForm:NgForm){
     return this.http.post(this.baseURLuser,userForm);
   }
-  postloginDetail(userForm:NgForm){
-    return this.http.get(this.baseURLuser+`/login`)
+  postloginDetail(username :string,password :string){
+    return this.http.get(this.baseURLuser+`/${username}`+`/${password}`)
   }
 
-
-  checkAccess(){
-    if(localStorage.getItem('user1')){
-      return true;
-    }
-    else{
-      return false;
-    }
+  getToken(){
+    return localStorage.getItem('token');
   }
+
+  loggedIn(){
+    return !!localStorage.getItem('token')
+  } 
 
   set setUser(val: string){
     this.role = val;

@@ -7,31 +7,28 @@ import { OrderDetailsService } from 'src/app/services/order-details.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  accessLogin :string ="";
-  accessdata!:string;
+  accessLogin :string|null ="";
   constructor(private service:OrderDetailsService) { }
 
   ngOnInit(): void {
-    const data = localStorage.getItem('user1')
+    const data = localStorage.getItem('token')
     if(data){
       this.logIn()
     }
-    else{
-     this.logOut();
-    }
   }
+  
   logIn(){
-    return localStorage.getItem('user1'); 
+    return localStorage.getItem('token'); 
   }
   logOut(){
-    localStorage.removeItem('user1');
+    localStorage.removeItem('role');
+    localStorage.removeItem('token');
   }
 
   accessuser(){
-    this.accessLogin=this.service.getUser
-    this.accessdata = this.accessLogin
-    console.log("access"+this.accessdata)
-    if(this.accessdata == 'user'){
+    this.accessLogin = localStorage.getItem('role')
+    console.log("access"+this.accessLogin)
+    if(this.accessLogin == 'user'){
       return true;
     }
     else{
@@ -40,9 +37,8 @@ export class NavbarComponent implements OnInit {
   }
 
   accessadmin(){
-    this.accessLogin=this.service.getUser
-    this.accessdata = this.accessLogin
-    if(this.accessdata == 'admin'){
+    this.accessLogin = localStorage.getItem('role')
+    if(this.accessLogin == 'admin'){
       return true;
     }
     else{

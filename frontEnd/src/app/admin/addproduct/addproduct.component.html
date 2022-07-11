@@ -27,7 +27,7 @@
             
                 <div class="form-outline mb-4">
                     <label class="form-label" for="registerPassword">Food Image</label>
-                    <input type="text" id="registerPassword"  formControlName="foodImage" class="form-control"  name="foodImage" />
+                    <input type="file" id="registerPassword" (change)="fileChangeEvent($event)" formControlName="foodImage" class="form-control"  name="foodImage" />
                     <!-- <small class="text-danger">Food Image is required</small> -->
                 </div>
     

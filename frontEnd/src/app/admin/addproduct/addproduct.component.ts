@@ -12,13 +12,14 @@ export class AddproductComponent implements OnInit {
   foodName !: string;
   foodDetail!: string;
   foodPrice!: string;
-  foodImage!: string;
+  foodImage!: any ;
   adminForm!:FormGroup;
   getMenuId: any;
 
   adminArray:ProductList[] =[]
   actionbtn!:string;
   _id!:string;
+  choosen: any;
 
   constructor(private adminService:AdminServiceService,private fb:FormBuilder,private router:Router,private route: ActivatedRoute) { 
     this.adminForm = this.fb.group({
@@ -33,7 +34,6 @@ export class AddproductComponent implements OnInit {
     this._id = this.adminService.getId
     this.adminService.getproductData(this._id).subscribe(
       (res:any)=>this.editProduct(res),
-      
       (err:any)=>console.log(err)
     )
   }
@@ -48,6 +48,15 @@ export class AddproductComponent implements OnInit {
     })
     }
 
+  fileChangeEvent(event : any){
+      if(event.target.value){
+        this.foodImage = <File>event.target.files[0];
+        this.choosen =  true
+        console.log("image"+this.foodImage);
+        console.log("chho"+this.choosen);
+      }
+  }
+
   add(userForm:FormGroup){
     console.log("Addproduct"+userForm.value + "id" +this._id)
     if(!this._id){
@@ -59,12 +68,10 @@ export class AddproductComponent implements OnInit {
     else{
       this.adminService.updateProduct(this._id,userForm.value).subscribe((res)=>{
         console.log("update"+res)
-        alert("product updated successfully")
+        alert("product updated successfully");
       })
     }
     
   }
-
-
 
 }

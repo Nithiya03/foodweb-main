@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './user/sharepage/navbar/navbar.component';
@@ -23,6 +23,9 @@ import { OrderDetailComponent } from './admin/order-detail/order-detail.componen
 import { AddproductComponent } from './admin/addproduct/addproduct.component';
 import { ProductComponent } from './admin/product/product.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { OrderDetailsService } from './services/order-details.service';
+import { AuthguardGuard } from './authguard/authguard.guard';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatIconModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [OrderDetailsService,AuthguardGuard,{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorService,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

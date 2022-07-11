@@ -11,6 +11,7 @@ import { Role } from './role';
 })
 export class RoleComponent implements OnInit {
   userModel = new Role();
+  role! : any
   access: any = ['user', 'admin']  
   user:any="";
   constructor(private router:Router,private service:OrderDetailsService) { }
@@ -19,7 +20,9 @@ export class RoleComponent implements OnInit {
   }
 
 
-  submit(userForm:NgForm){  
+  submit(userForm:NgForm){ 
+    this.role = Object.values(userForm.value)[0];
+    localStorage.setItem('role',this.role)
    if(Object.values(userForm.value)[0] == "user" ){
     this.user=Object.values(userForm.value)[0] ;
     this.service.setUser=this.user

@@ -10,12 +10,12 @@ export class AuthguardGuard implements CanActivate {
   constructor(private router:Router,private service:OrderDetailsService){}
   canActivate( route: ActivatedRouteSnapshot,state: RouterStateSnapshot ): boolean {
     if(this.service.authlog()){
-      console.log(1)
+      console.log("work aaguthu:")
       return true;
     }
     else{
-      window.alert("After Login the user can Buy products")
-      this.router.navigate(['../../login'])
+      window.alert("After Login the user can Buy products new ")
+      this.router.navigate(['/login'])
       console.log(2)
       return false;
     }
