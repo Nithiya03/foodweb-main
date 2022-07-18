@@ -8,70 +8,75 @@ import { order } from '../pages/menupage/order';
 export class OrderDetailsService{
   readonly baseURLuser = 'http://localhost:8000/users';
   readonly baseURL = 'http://localhost:8000/admins';
-  role: string ="";
-  userData: any;
+  private role: string ="";
+  public userData: any;
+
   constructor(private http:HttpClient) { }
 
-  getAllProduct(){
+  public getAllProduct(){
     return this.http.get(this.baseURL+'/getAllProduct');
   }
-  getProductById(_id :string){
+
+  public getProductById(_id :string){
     return this.http.get(this.baseURL+`/${_id}`)
   }
-  // getCheck():boolean{
-  //   return this.data = true;
-  // }
-  // getChecklog(){
-  //   if(this.getCheck()){
-  //     return this.authData = true;
-  //   }
-  //   else{
-  //     return this.authData = false
-  //   }
-  // }
-  postUserDetail(userForm:NgForm){
+
+  public postUserDetail(userForm:NgForm){
     return this.http.post(this.baseURLuser+`/postUserDetail`,userForm);
   }
-  postLoginDetail(userForm:NgForm){
+
+  public postLoginDetail(userForm:NgForm){
     return this.http.post(this.baseURLuser+`/login`,userForm);
   }
-  postCheckEmail(userForm:NgForm){
+
+  public postCheckEmail(userForm:NgForm){
     return this.http.post(this.baseURLuser+`/emailCheck`,userForm)
   }
-  getuserEmail(email : any){
-    return this.http.get(this.baseURLuser+`/getUserEmail`,email)
+
+  public getUserEmail(email : any){
+    console.log(email);
+    return this.http.get(this.baseURLuser+`/getUserEmail`+`/${email}`)
   }
-  getuserDetails(){
-    return this.http.get(this.baseURLuser+`/userDetail`)
+
+  public getuserDetails(){
+    return this.http.get(this.baseURLuser+`/userDetail/data`)
   }
-  // accessData(_id:string,data:any){
-  //   console.log(JSON.stringify(data));
-  //   return this.http.put(this.baseURLuser+`/${_id}`,data)
-  // }
-  update(email:string,password:string){
+
+  public getUserDetailById(id :string){
+    return this.http.get(this.baseURLuser+`/${id}`)
+  }
+
+  public update(email:string,password:string){
     return this.http.put(this.baseURLuser+`/${email}`,password)
   }
-  getToken(){
+
+  public updateUser(userform : NgForm,id : string){
+    return this.http.put(this.baseURLuser+`/${id}`,userform)
+  }
+
+  public getToken(){
     return localStorage.getItem('token');
   }
-  loggedIn(){
+
+  public loggedIn(){
     return !!localStorage.getItem('token')
   } 
 
-  set setUser(val: string){
+  public set setUser(val: string){
     this.role = val;
   }
 
-  get getUser(){
+  public get getUser(){
     return this.role;
   }
 
-  set userEmail(val: string){
+  public set userEmail(val: string){
     console.log(val);
-    
+    localStorage.setItem('email',val)
     this.userData = val;
   }
-  get getEmail(){
+
+  public get getEmail(){
     return this.userData
   }
 }

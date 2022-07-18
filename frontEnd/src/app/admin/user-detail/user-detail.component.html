@@ -10,16 +10,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let u of userDetail">
-            <td>{{u.name}}</td>
-            <td>{{u.email}}</td>
-            <td>{{u.mobile}}</td>
-            <td>{{u._id}}</td>
+        <tr *ngFor="let user of userDetail">
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.mobile}}</td>
+            <td>{{user._id}}</td>
             <td>
               <form>
-                <input type="radio" id="permit" name="access" value="permit" (change)="access($event,u._id)">
+                <input type="radio" id="permit" name="access" value="permit" [checked]="user.access == true" (change)="access($event,user._id)">
                 <label for="permit">AccessPermit</label><br>
-                <input type="radio" id="denied" name="access" value="denied" (change)="access($event,u._id)">
+                <input type="radio" id="denied" name="access" value="denied" [checked]="user.access == false" (change)="access($event,user._id)">
                 <label for="denied">AccessDenied</label><br>
               </form>
             </td>

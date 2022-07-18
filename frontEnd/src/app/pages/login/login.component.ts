@@ -13,13 +13,15 @@ import { ForgotPasswordComponent } from '../forgot-password/forgot-password.comp
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  userModel = new User();
-  message: any;
-  token: any;
+  public userModel = new User();
+  private message: any;
+  private token: any;
   constructor(private router: Router, private service: OrderDetailsService, private snackBar: MatSnackBar,public dialog: MatDialog) { }
+
   ngOnInit(): void {
   }
-  login(userForm: NgForm) {
+
+  public login(userForm: NgForm) {
     this.service.userEmail=userForm.value['email']
     this.service.postLoginDetail(userForm.value).subscribe((res) => {
       this.message = Object.values(res)[1]
@@ -33,8 +35,7 @@ export class LoginComponent implements OnInit {
         window.alert("Invalid Login")
         this.router.navigate(['/login'])
       }
-    },
-    (err)=>{
+    },(err)=>{
       alert(err)
     })
   }

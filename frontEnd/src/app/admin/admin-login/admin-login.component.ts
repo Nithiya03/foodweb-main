@@ -10,11 +10,8 @@ import {Admin} from '../admin-login/admin'
   styleUrls: ['./admin-login.component.scss']
 })
 export class AdminLoginComponent implements OnInit {
-  userModel = new Admin();
-  userName:string | any = "";
-  password:string | any = "";
-  message: any;
-  token: any;
+  public userModel = new Admin();
+  private token!: string;
   constructor(private router:Router,private adminService:AdminServiceService) { }
 
   ngOnInit(): void {

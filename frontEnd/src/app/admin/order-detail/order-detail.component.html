@@ -8,18 +8,16 @@
           <th >Quantity</th>
           <th >Total</th>
           <th >FoodName</th>
-          <th >Orders</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let u of orderData">
-          <td>{{u.name}}</td>
-          <td>{{u.phone}}</td>
-          <td>{{u.address}}</td>
-          <td>{{u.quantity}}</td>
-          <td>{{u.total}}</td>
-          <td>{{u.foodName}}</td>
-          <td>Order placed</td>
+        <tr *ngFor="let order of orderData">
+          <td>{{order.name}}</td>
+          <td>{{order.phone}}</td>
+          <td>{{order.address}}</td>
+          <td>{{order.quantity}}</td>
+          <td>{{order.total}}</td>
+          <td>{{order.foodName}}</td>
         </tr>
       </tbody>
     </table>

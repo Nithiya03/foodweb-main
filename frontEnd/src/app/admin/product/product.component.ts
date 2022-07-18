@@ -9,14 +9,12 @@ import { AdminServiceService } from 'src/app/services/admin-service.service';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  product : any = [];
+  public product : any = [];
   constructor(private router:Router,private adminService:AdminServiceService) { }
-
   ngOnInit(): void {
     this.getData();
   }
-
-  getData(){
+  private getData(){
     this.adminService.getProduct().subscribe((res)=>{
       this.product = res
     },
@@ -25,16 +23,10 @@ export class ProductComponent implements OnInit {
       
     });
   }
-
-  addProduct(){
-    this.router.navigate(['/addproduct'])
-  }
-
-  doUpdate(_id : string){
+  public doUpdate(_id : string){
     this.adminService.setId = _id
   }
-
-  doDelete(_id:string){
+  public doDelete(_id:string){
     if (confirm('Are you sure to delete this record ?') == true) {
 
       this.adminService.deleteProduct(_id).subscribe((res) => {

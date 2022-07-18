@@ -8,9 +8,9 @@ import { OrderDetailsService } from 'src/app/services/order-details.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  public foodData:any=[];
   constructor(private service:OrderDetailsService) { }
-  foodData:any=[];
+  
   ngOnInit(): void {
     this.service.getAllProduct().subscribe((res)=>{
       this.foodData = res

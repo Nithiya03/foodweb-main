@@ -8,29 +8,30 @@ import { OrderDetailsService } from 'src/app/services/order-details.service';
   styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit {
-  accessLogin: string = '';
+  public data!: string|null;
+  public userDetail:any = []
   constructor(private service:OrderDetailsService,private loginService:LoginService) { }
-  userDetail:any = []
-    ngOnInit(){
+
+  ngOnInit(){
     this.service.getuserDetails().subscribe((res)=>{
       this.userDetail = res
+      console.log(this.userDetail);
     },
     (err)=>{
       alert(err)
     })
   }
-
-  access($event : any,id : string){
-      this.accessLogin = $event.target.value
-    if(this.accessLogin == 'permit'){
-      this.loginService.accessData(id,this.accessLogin).subscribe((res)=>{
+  
+  public access($event : any,id : string){
+      localStorage.setItem('access',$event.target.value)
+      this.data = localStorage.getItem('access')
+    if(this.data == 'permit'){
+      this.loginService.accessData(id,this.data).subscribe((res)=>{
         console.log(res);
-       },(err)=>{
-        alert(err)
        })
     }
     else{
-      this.loginService.accessData(id,this.accessLogin).subscribe((res)=>{
+      this.loginService.accessData(id,this.data).subscribe((res)=>{
         console.log(res);
        })
     }    

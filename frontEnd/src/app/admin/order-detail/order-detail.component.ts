@@ -7,14 +7,14 @@ import { AdminServiceService } from 'src/app/services/admin-service.service';
   styleUrls: ['./order-detail.component.scss']
 })
 export class OrderDetailComponent implements OnInit {
-  orderData:any = []
+  public orderData:any = []
   constructor(private adminService:AdminServiceService) { }
 
   ngOnInit(): void {
     this.getOrderDetails();
   }
 
-  getOrderDetails(){
+  private getOrderDetails(){
     this.adminService.getOrder().subscribe((res)=>{  
       this.orderData = res 
     },

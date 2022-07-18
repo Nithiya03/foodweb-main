@@ -14,7 +14,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { MenupageComponent } from './pages/menupage/menupage.component';
-import { OrderComponent } from './pages/order/order.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { RoleComponent } from './role/role.component';
@@ -27,14 +26,14 @@ const routes: Routes = [
   {path:'orderDetail',component:OrderDetailComponent,canActivate:[AdminAuthenticationGuard]},
   {path:'addproduct',component:AddproductComponent,canActivate:[AdminAuthenticationGuard]},
   {path:'update/:id',component:AddproductComponent,canActivate:[AdminAuthenticationGuard]},
+  {path:'register',component:RegisterComponent},
+  {path:'edit/:id',component:RegisterComponent},
   {path:'profile',component:ProfileComponent,canActivate:[AuthguardGuard]},
-  {path:'order',component:OrderComponent,canActivate:[AuthguardGuard]},
   {path:'menu',component:MenuComponent},
   {path:'admin',component:AdminLoginComponent},
   {path:'menu/:id',component:MenupageComponent,canActivate:[AuthguardGuard]},
   {path:'about',component:AboutComponent},
   {path:'login',component:LoginComponent},
-  {path:'register',component:RegisterComponent},
   {path:'order',component:FinalPageComponent,canActivate:[AuthguardGuard]},
   {path:'forgot-password',component:ForgotPasswordComponent},
   {path:'**',component:RoleComponent}

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { OrderDetailsService } from 'src/app/services/order-details.service';
 import {User} from './user1'
 @Component({
@@ -8,13 +9,36 @@ import {User} from './user1'
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  userModel = new User();
-  constructor(private service:OrderDetailsService) { }
+  @ViewChild('userForm') userForm !: NgForm;
+  public choice : boolean = false;
+  public userModel = new User();
+  private userId: any;
+  constructor(private service:OrderDetailsService,private param:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.userId = this.param.snapshot.paramMap.get('id');
+    this.service.getUserDetailById(this.userId).subscribe(
+      (res:any)=>this.editData(res),
+      (err:any)=>alert(err)
+    )
   }
 
-  access(userForm:NgForm){
+  public update(userform : NgForm){
+    this.service.updateUser(userform.value,this.userId).subscribe((res)=>{
+      console.log(res);
+    })
+  }
+  private editData(res : User){
+    this.choice = true;
+    this.userForm.setValue({
+      name : res.name,
+      mobile :res.mobile,
+      email : res.email,
+      password : res.password,
+      confirmPassword:res.confirmPassword
+    })
+  }
+  public access(userForm:NgForm){
     this.service.postUserDetail(userForm.value).subscribe((res)=>{
     },
     (err)=>{

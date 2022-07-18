@@ -7,7 +7,6 @@ exports.isAuthenticatedUser = async( req , res, next)=>{
         return res.status(401).json("access denied , please login")
     }
     const token = req.headers.authorization.split(' ')[1]
-
     if(token ==='null'){
         return res.status(401).json("access denied ,please login")
     }

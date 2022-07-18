@@ -10,16 +10,9 @@ import { ProductList } from '../addproduct/productlist'
   styleUrls: ['./addproduct.component.scss']
 })
 export class AddproductComponent implements OnInit {
-  foodImg! :Observable<any>;
-  cardImageBase64: any;
-  adminForm:FormGroup |any;
-  getMenuId: any;
 
-  adminArray:ProductList[] =[]
-  actionbtn!:string;
-  _id!:string;
-  choosen: any;
-  imageError!: string;
+  public adminForm:FormGroup | any;
+  public _id!:string;
 
   constructor(private adminService:AdminServiceService,private fb:FormBuilder,private router:Router,private route: ActivatedRoute) { 
     this.adminForm = this.fb.group({
@@ -51,8 +44,7 @@ export class AddproductComponent implements OnInit {
     )
   }
 
-  editProduct(product : ProductList ){
-
+  private editProduct(product : ProductList ){
     this.adminForm.patchValue({
       foodName:product.foodName,
       foodDetail:product.foodDetail,
@@ -61,20 +53,17 @@ export class AddproductComponent implements OnInit {
     })
   }
 
-  add(userForm:FormGroup){
-
+  public add(userForm:FormGroup){
     if(!this._id){
       this.adminService.addProduct(userForm.value).subscribe((res)=>{
         alert("product added successfully");
       },
       (err)=>{
         alert(err)
-        
       })
     }
     else{
       this.adminService.updateProduct(this._id,userForm.value).subscribe((res)=>{
-        // console.log("update"+res)
         alert("product updated successfully");
       },
       (err)=>{

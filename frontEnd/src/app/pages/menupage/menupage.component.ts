@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from  '@angular/router'
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { OrderDetailsService } from 'src/app/services/order-details.service';
@@ -12,13 +12,13 @@ import { order } from './order';
 })
 
 export class MenupageComponent implements OnInit {
-  quantity: number = 1
-  total!:number;
-  menuForm:FormGroup | any;
-  userModel = new order()
-  getMenuId:any;
-  menuData:any = [];
-  orderChoice : boolean = false;
+  public quantity: number = 1
+  public total!:number;
+  public menuForm:FormGroup | any;
+  public userModel = new order()
+  private getMenuId:any;
+  public menuData:any = [];
+  public orderChoice : boolean = false;
 
   constructor(private param:ActivatedRoute,private service:OrderDetailsService,private fb:FormBuilder,private router:Router,private adminService:AdminServiceService) { 
     this.menuForm = this.fb.group({
@@ -51,11 +51,11 @@ export class MenupageComponent implements OnInit {
     return this.menuForm.get('address')
   }
 
-  orderDetail(){
+  public orderDetail(){
     this.orderChoice = true; 
   }
 
-  decrease(){
+  public decrease(){
     if(this.quantity <= 1){
       this.quantity = 1;
     }
@@ -64,8 +64,7 @@ export class MenupageComponent implements OnInit {
     }
   }
   
-
-  increase(){
+  public increase(){
     if(this.quantity >= 10){
       this.quantity = 10;
     }
@@ -73,12 +72,9 @@ export class MenupageComponent implements OnInit {
       this.quantity++;
     }
   }
-  getquantity(){
-  }
-
-  productData(userForm:FormGroup,quantity1:number,total:number){
+  
+  public productData(userForm:FormGroup,quantity1:number,total:number){
     this.adminService.postOrderDetail(userForm.value,quantity1,total,this.menuData['foodName']).subscribe(()=>{
-
     })
   }
 

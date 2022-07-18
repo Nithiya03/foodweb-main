@@ -7,46 +7,52 @@ import { FormGroup, NgForm } from '@angular/forms';
 })
 export class AdminServiceService {
   readonly baseURL = 'http://localhost:8000/admins';
-  productId! :string;
+  public productId! :string;
+  
   constructor(private http:HttpClient) { }
 
-  addProduct(userForm:FormGroup){
+  public addProduct(userForm:FormGroup){
     return this.http.post(this.baseURL+`/addProduct`,userForm)
   }
-  getProduct(){
+
+  public getProduct(){
     return this.http.get(this.baseURL+`/getAllProduct`)
   }
-  getOrder(){
+
+  public getOrder(){
     return this.http.get(this.baseURL+`/orderList`);
   }
-  getproductData(_id:string){
+
+  public getproductData(_id:string){
     return this.http.get(this.baseURL + `/${_id}`);
   }
-  updateProduct(_id:string,userForm:NgForm){
+
+  public updateProduct(_id:string,userForm:NgForm){
     console.log(_id+ " "+userForm)
     return this.http.put(this.baseURL+`/${_id}`,userForm);
   }
-  deleteProduct(_id:string){
+
+  public deleteProduct(_id:string){
     return this.http.delete(this.baseURL + `/${_id}`);
   }
-  adminLogin(userForm:NgForm){
+
+  public adminLogin(userForm:NgForm){
     return this.http.post(this.baseURL+`/login`,userForm)
   }
-  loggedIn(){
+
+  public loggedIn(){
     return !!localStorage.getItem('token')
   }
-  userAccess(){
-    
-  }
-  postOrderDetail(userForm:FormGroup,quantity1:number,total:number,foodName:string){
+
+  public postOrderDetail(userForm:FormGroup,quantity1:number,total:number,foodName:string){
     return this.http.post(this.baseURL+`/${quantity1}`+`/${total}`+`/${foodName}`,userForm);
   }
 
-  set setId(_id : string){
+  public set setId(_id : string){
     this.productId = _id;
   }
 
-  get getId(){
+  public get getId(){
     return this.productId;
   }
 }

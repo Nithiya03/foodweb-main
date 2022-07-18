@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { OrderDetailsService } from 'src/app/services/order-details.service';
 
 @Component({
@@ -7,13 +8,15 @@ import { OrderDetailsService } from 'src/app/services/order-details.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  userEmail! : string;
-  constructor(private service:OrderDetailsService) { }
+  public userEmail! :any;
+  public data:any = []
+  public email!: string;
+  constructor(private service:OrderDetailsService, private param:ActivatedRoute) { }
 
-  ngOnInit(): void {
-    this.userEmail =this.service.getEmail
-    this.service.getuserEmail(this.userEmail).subscribe((res)=>{
-      console.log(res);
+  ngOnInit(): void{
+    this.userEmail = localStorage.getItem('email')
+    this.service.getUserEmail(this.userEmail).subscribe((res)=>{
+      this.data=res     
     })
 
   }

@@ -10,17 +10,15 @@ import { Role } from './role';
   styleUrls: ['./role.component.scss']
 })
 export class RoleComponent implements OnInit {
-  userModel = new Role();
-  role! : any
-  access: any = ['user', 'admin']  
-  user:any="";
+  public userModel = new Role();
+  public role! : any
+  public access: any = ['user', 'admin']  
+  private user:any="";
   constructor(private router:Router,private service:OrderDetailsService) { }
 
   ngOnInit(): void {
   }
-
-
-  submit(userForm:NgForm){ 
+  public submit(userForm:NgForm){ 
     this.role = Object.values(userForm.value)[0];
     localStorage.setItem('role',this.role)
    if(Object.values(userForm.value)[0] == "user" ){

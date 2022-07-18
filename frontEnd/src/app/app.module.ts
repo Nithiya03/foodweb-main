@@ -30,8 +30,6 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import {MatDialogModule} from '@angular/material/dialog';
 import { UserDetailComponent } from './admin/user-detail/user-detail.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { OrderComponent } from './pages/order/order.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,8 +49,7 @@ import { OrderComponent } from './pages/order/order.component';
     ProductComponent,
     ForgotPasswordComponent,
     UserDetailComponent,
-    ProfileComponent,
-    OrderComponent
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -6,15 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-
+  public  role !:string |any;
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  role !:string |any;
-
-  access(){
+  public access(){
     this.role = localStorage.getItem('role')
     if(this.role == 'user'){
       return true;

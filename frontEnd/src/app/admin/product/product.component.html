@@ -1,7 +1,7 @@
 
 <div class="row float-right mt-2 mr-2 mb-2">
   <div class="col-xs-12">
-    <button class="btn btn-primary" (click)="addProduct()">Add New Product</button>
+    <button class="btn btn-primary" [routerLink]="['/addproduct']">Add New Product</button>
   </div>
 </div>
 
@@ -18,17 +18,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let u of product">
-        <td>{{u.foodName}}</td>
-        <td>{{u.foodDetail}}</td>
-        <td>{{u.foodPrice}}</td>
-        <td><img src="{{u.foodImage}}" height="50" width="50"></td>
-        <td>{{u.foodImage}}</td>
+      <tr *ngFor="let productData of product">
+        <td>{{productData.foodName}}</td>
+        <td>{{productData.foodDetail}}</td>
+        <td>{{productData.foodPrice}}</td>
+        <td><img src="{{productData.foodImage}}" height="50" width="50"></td>
+        <td>{{productData.foodImage}}</td>
         <td> 
-          <button mat-icon-button color="primary" [routerLink]="['/update',u._id]" (click)="doUpdate(u._id)">
+          <button mat-icon-button color="primary" [routerLink]="['/update',productData._id]" (click)="doUpdate(productData._id)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="doDelete(u._id)">
+          <button mat-icon-button color="warn" (click)="doDelete(productData._id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

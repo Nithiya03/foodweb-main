@@ -7,12 +7,14 @@ import { Injectable } from '@angular/core';
 export class LoginService {
 
   constructor(private http:HttpClient) { }
-  readonly baseURLlogin = 'http://localhost:8000/users/updateUser';
-   accessData(_id:string,access:any){
+  readonly baseURLlogin = 'http://localhost:8000/users';
+   
+  public accessData(_id:string,access:any){
     console.log(access);
     let data ={
       "access" : access
     }
-    return this.http.post(this.baseURLlogin+`/${_id}`,data)
+    return this.http.post(this.baseURLlogin+`/updateUser`+`/${_id}`,data)
   }
+  
 }

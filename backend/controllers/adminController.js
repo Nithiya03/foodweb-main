@@ -15,7 +15,7 @@ router.get('/getAllProduct',(req,res) => {
             res.status(200).json(docs)
         }
         else{
-            res.status(400).json('Admin Not Found')
+            res.status(400).json({message:'Admin Not Found',docs})
         }
     });
 }) 
@@ -26,7 +26,7 @@ router.get('/orderList',(req,res) => {
             res.status(200).json(docs)
         }
         else{
-            res.status(400).json('Error in retriving orderlist')
+            res.status(400).json({message:'Error in retriving orderlist',docs})
         }
     });
 }) 
@@ -40,7 +40,7 @@ router.get('/:id',(req,res)=>{
             res.status(200).json(doc)
         }
         else{
-           res.status(400).json('Error in retriving product')
+           res.status(400).json({message:'Error in retriving product',doc})
         }
     })
 })
@@ -58,7 +58,7 @@ router.post('/addProduct',(req,res)=>{
             res.status(200).json(doc)
         }
         else{
-           res.status(400).json('Error in storing products')
+           res.status(400).json({message:'Error in storing products',doc})
         }
     })
 });
@@ -77,7 +77,7 @@ router.post('/:quantity/:total/:foodName',(req,res)=>{
             res.status(200).json(doc)
         }
         else{
-            res.status(400).json('Error in posting order detail')
+            res.status(400).json({message:'Error in posting order detail',doc})
         }
     })
 });
@@ -97,7 +97,7 @@ router.put('/:id',(req,res)=>{
             res.status(200).json(data)
         }
         else
-            res.status(400).json('Error in updating products')
+            res.status(400).json({message:'Error in updating products',data})
     });
 })
 
@@ -108,7 +108,7 @@ router.delete('/:id',(req,res)=>{
     if(!err)
         res.status(200).json(data)
     else
-        res.status(400).json('Error in deleting product')
+        res.status(400).json({message:'Error in deleting product',data})
 });
 })
 
@@ -122,7 +122,7 @@ router.post('/adminLogin',(req,res)=>{
         if(!err)
             res.status(200).json(doc)
         else
-            res.status(400).json('Error in storing admin details')
+            res.status(400).json({message:'Error in storing admin details',doc})
 });
 })
 
