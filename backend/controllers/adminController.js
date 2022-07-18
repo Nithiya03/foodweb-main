@@ -1,22 +1,21 @@
 const express = require('express');
-
+const jwt=require('jsonwebtoken');
 var router = express.Router();
-
+const bcrypt = require('bcryptjs')
+require('dotenv').config();
 var ObjectId = require('mongoose').Types.ObjectId;
 
 var { Admin } = require('../models/admin')
 var { Order } = require('../models/order')
+var { Login } = require('../models/login')
 
-
-
-
-router.get('/',(req,res) => {
+router.get('/getAllProduct',(req,res) => {
     Admin.find((err,docs) => {
         if(!err){
-            res.send(docs)
+            res.status(200).json(docs)
         }
         else{
-            console.log('Error in Retriving Employees :'+JSON.stringify(err));
+            res.status(400).json('Admin Not Found')
         }
     });
 }) 
@@ -24,11 +23,10 @@ router.get('/',(req,res) => {
 router.get('/orderList',(req,res) => {
     Order.find((err,docs) => {
         if(!err){
-            console.log(docs);
-            res.send(docs)
+            res.status(200).json(docs)
         }
         else{
-            console.log('Error in Retriving Employees :'+JSON.stringify(err));
+            res.status(400).json('Error in retriving orderlist')
         }
     });
 }) 
@@ -39,15 +37,16 @@ router.get('/:id',(req,res)=>{
     }
     Admin.findById(req.params.id,(err,doc) =>{
         if(!err){
-            res.send(doc);
+            res.status(200).json(doc)
         }
         else{
-            console.log(`Error in retriving user`+JSON.stringify(err,undefined,2));
+           res.status(400).json('Error in retriving product')
         }
     })
 })
 
-router.post('/',(req,res)=>{
+router.post('/addProduct',(req,res)=>{
+    console.log(req.body);
     var admin = new Admin({
         foodName : req.body.foodName,
         foodDetail : req.body.foodDetail,
@@ -56,10 +55,10 @@ router.post('/',(req,res)=>{
     });
     admin.save((err,doc)=> {
         if(!err){
-            res.send(doc);
+            res.status(200).json(doc)
         }
         else{
-            console.log('Error in Retriving Employees :'+JSON.stringify(err));
+           res.status(400).json('Error in storing products')
         }
     })
 });
@@ -75,17 +74,15 @@ router.post('/:quantity/:total/:foodName',(req,res)=>{
     });
     order.save((err,doc)=> {
         if(!err){
-            res.send(doc);
+            res.status(200).json(doc)
         }
         else{
-            console.log('Error in Retriving Employees :'+JSON.stringify(err));
+            res.status(400).json('Error in posting order detail')
         }
     })
 });
 
 router.put('/:id',(req,res)=>{
-    console.log("id"+req.params.id);
-    console.log("data "+req.body.foodPrice)
     if(!ObjectId.isValid(req.params.id)){
         return res.status(400).send(`No record with the given id : $(req.params.id)`);
     }
@@ -97,23 +94,56 @@ router.put('/:id',(req,res)=>{
     };
     Admin.findByIdAndUpdate(req.params.id,{$set:admin},{new:true},(err,data)=>{
         if(!err){
-            console.log("put",data)
-            res.send(data);
+            res.status(200).json(data)
         }
         else
-            console.log('Error in Material Update : '+JSON.stringify(err,undefined,2));
+            res.status(400).json('Error in updating products')
     });
 })
 
 router.delete('/:id',(req,res)=>{
     if(!ObjectId.isValid(req.params.id))
-        return res.status(400).send(`No record with the given id : $(req.params.id)`);
+        return res.status(400).json(`No record with the given id : $(req.params.id)`);
     Admin.findByIdAndRemove(req.params.id,(err,data)=>{
     if(!err)
-        res.send(data);
+        res.status(200).json(data)
     else
-        console.log('Error in Material Delete : '+JSON.stringify(err,undefined,2));
+        res.status(400).json('Error in deleting product')
 });
 })
+
+router.post('/adminLogin',(req,res)=>{
+    const hashedPassword = bcrypt.hashSync(req.body.password,12)
+    var login = new Login({
+        name : req.body.name,
+        password : hashedPassword
+    });
+    login.save((err,doc)=>{
+        if(!err)
+            res.status(200).json(doc)
+        else
+            res.status(400).json('Error in storing admin details')
+});
+})
+
+router.post('/login',async (req,res)=>{
+    const admin = await Login.findOne({ name: req.body.name});
+    console.log(admin);
+    if(!admin){
+        return res.status(401).json('Invalid Username')
+    }
+    else{
+        let payload=req.body.password;
+        let token=jwt.sign(payload,process.env.ACCESS_TOKEN)
+        const isPasswordCorrect = bcrypt.compareSync(req.body.password, admin.password)
+        if(!isPasswordCorrect){
+            res.status(404).json({message:'Incorrect password'})
+        }
+        else{
+            res.status(200).json({token,message:'true'});
+        }
+    }
+});
+
 
 module.exports = router;

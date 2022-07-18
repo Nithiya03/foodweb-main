@@ -27,7 +27,6 @@ export class NavbarComponent implements OnInit {
 
   accessuser(){
     this.accessLogin = localStorage.getItem('role')
-    console.log("access"+this.accessLogin)
     if(this.accessLogin == 'user'){
       return true;
     }
@@ -45,5 +44,6 @@ export class NavbarComponent implements OnInit {
       return false;
     }
   }
+
 }
 

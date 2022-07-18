@@ -15,9 +15,10 @@ export class RegisterComponent implements OnInit {
   }
 
   access(userForm:NgForm){
-     console.log("register "+userForm.value)
     this.service.postUserDetail(userForm.value).subscribe((res)=>{
-        console.log("register"+res); 
+    },
+    (err)=>{
+      alert(err)
     });
   }
 }

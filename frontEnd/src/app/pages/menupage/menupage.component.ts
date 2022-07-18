@@ -12,36 +12,43 @@ import { order } from './order';
 })
 
 export class MenupageComponent implements OnInit {
-  name !: string;
-  phone!: number;
-  address!: string;
   quantity: number = 1
   total!:number;
-
-  constructor(private param:ActivatedRoute,private service:OrderDetailsService,private fb:FormBuilder,private router:Router,private adminService:AdminServiceService) { 
-    this.menuForm = this.fb.group({
-      name : new FormControl('',[Validators.required]),
-      phone:new FormControl('',[Validators.required]),
-      address: new FormControl('',[Validators.required]),
-      // quantity:new FormControl('',[Validators.required])
-    })
-  }
+  menuForm:FormGroup | any;
   userModel = new order()
   getMenuId:any;
   menuData:any = [];
   orderChoice : boolean = false;
-  menuForm!:FormGroup;
+
+  constructor(private param:ActivatedRoute,private service:OrderDetailsService,private fb:FormBuilder,private router:Router,private adminService:AdminServiceService) { 
+    this.menuForm = this.fb.group({
+      name : new FormControl('',[Validators.required,Validators.pattern('^[[A-Z]{1}[a-z]{1,9}$')]),
+      phone: new FormControl('',[Validators.required,Validators.pattern('^[6-9]{1}[0-9]{9}$')]),
+      address: new FormControl('',[Validators.required]),
+      quantity!: new FormControl('',[Validators.required]),
+      total!: new FormControl('',[Validators.required]),
+    })
+  }
+  
 
   ngOnInit(){
     this.getMenuId = this.param.snapshot.paramMap.get('id');
-    console.log("id"+this.getMenuId)
     if(this.getMenuId)
     {
       this.service.getProductById(this.getMenuId).subscribe((res)=>{
         this.menuData = res
-        console.log(this.menuData['foodName'])
       });
     }
+  }
+
+  get name(){
+    return this.menuForm.get('name')
+  }
+  get phone(){
+    return this.menuForm.get('phone')
+  }
+  get address(){
+    return this.menuForm.get('address')
   }
 
   orderDetail(){
@@ -56,6 +63,7 @@ export class MenupageComponent implements OnInit {
       this.quantity--;
     }
   }
+  
 
   increase(){
     if(this.quantity >= 10){

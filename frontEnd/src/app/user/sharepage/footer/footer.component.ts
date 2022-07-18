@@ -12,4 +12,17 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  role !:string |any;
+
+  access(){
+    this.role = localStorage.getItem('role')
+    if(this.role == 'user'){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+
 }

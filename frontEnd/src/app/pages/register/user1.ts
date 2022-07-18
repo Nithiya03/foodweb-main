@@ -1,6 +1,7 @@
 export class User {
     name: string='';
     email: string='';
-    mobile: number=0;
+    mobile!: number;
     password : string='';
+    confirmPassword : string= '';
 }

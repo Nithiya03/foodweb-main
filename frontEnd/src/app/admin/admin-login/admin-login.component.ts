@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AdminServiceService } from 'src/app/services/admin-service.service';
 import {Admin} from '../admin-login/admin'
 
 @Component({
@@ -10,21 +11,28 @@ import {Admin} from '../admin-login/admin'
 })
 export class AdminLoginComponent implements OnInit {
   userModel = new Admin();
-  userName:string = "Admin199";
-  password:string = "199@admin";
-  constructor(private router:Router) { }
+  userName:string | any = "";
+  password:string | any = "";
+  message: any;
+  token: any;
+  constructor(private router:Router,private adminService:AdminServiceService) { }
 
   ngOnInit(): void {
   }
 
   adminAccess(userForm:NgForm){
-    if(this.userName == Object.values(userForm.value)[0] && this.password == Object.values(userForm.value)[1]){
-      this.router.navigate(['product']);
-    }
-    else{
-      this.router.navigate(['/admin'])
-      window.alert("Error in admin Login")
-      
-    }
+    this.adminService.adminLogin(userForm.value).subscribe((res:any) => {
+        if(res){
+          this.router.navigate(['/product'])
+          localStorage.setItem('token',this.token)
+        }
+        else{
+          this.router.navigate(['/admin'])
+        }
+    },
+      (err)=>{
+        alert(err)
+        
+      })
   }
 }

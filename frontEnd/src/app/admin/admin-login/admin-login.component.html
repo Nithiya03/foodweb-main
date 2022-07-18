@@ -9,18 +9,18 @@
 
         <div class="form-outline mb-4">
           <label class="form-label" for="loginName">UserName</label>
-          <input type="text" id="loginName" #name="ngModel" class="form-control" required
+          <input type="text" id="loginName" #name="ngModel" pattern="^[A-Z]{1}[a-z]{4}[1-9]{3}"class="form-control" required
           [class.is-invalid]="name.invalid && name.touched"  name="name" [(ngModel)]="userModel.name" />
-          <small class="text-danger" [class.d-none]="name.valid || name.untouched">UserName is required</small>
-          
+          <small class="text-danger" [class.d-none]="name.valid || name.untouched">UserName is required<br/></small>
+          <small class="text-danger" *ngIf="name.errors?.['pattern']">Invalid UserName</small>
         </div>
  
         <div class="form-outline mb-4">
           <label class="form-label" for="loginPassword">Password</label>
-          <input type="password" id="loginPassword" #password="ngModel" class="form-control" required
+          <input type="password" id="loginPassword" #password="ngModel" pattern="^[0-9]{3}+@[a-z]{5,}" class="form-control" required
           [class.is-invalid]="password.invalid && password.touched" name="password" [(ngModel)]="userModel.password" />
-          <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required</small>
-          
+          <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required<br/></small>
+          <small class="text-danger" *ngIf="password.errors?.['pattern']">Invalid password</small>
         </div>
   
       

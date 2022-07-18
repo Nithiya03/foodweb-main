@@ -26,6 +26,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { OrderDetailsService } from './services/order-details.service';
 import { AuthguardGuard } from './authguard/authguard.guard';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { UserDetailComponent } from './admin/user-detail/user-detail.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { OrderComponent } from './pages/order/order.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +48,11 @@ import { AuthguardGuard } from './authguard/authguard.guard';
     RoleComponent,
     OrderDetailComponent,
     AddproductComponent,
-    ProductComponent
+    ProductComponent,
+    ForgotPasswordComponent,
+    UserDetailComponent,
+    ProfileComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +63,8 @@ import { AuthguardGuard } from './authguard/authguard.guard';
     MatSnackBarModule,
     MatButtonModule,
     MatIconModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [OrderDetailsService,AuthguardGuard,{
     provide:HTTP_INTERCEPTORS,

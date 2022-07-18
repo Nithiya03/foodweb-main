@@ -17,8 +17,11 @@ export class OrderDetailComponent implements OnInit {
   getOrderDetails(){
     this.adminService.getOrder().subscribe((res)=>{  
       this.orderData = res 
-      console.log(this.orderData);
-    })
+    },
+      (err)=>{
+        alert(err)
+        
+      })
   }
 
 

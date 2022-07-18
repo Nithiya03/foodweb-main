@@ -1,16 +1,14 @@
 <div class="container">
-    
     <div class="row">
         
         <div class="foodbox col-lg-6" *ngIf="menuData">
             <a class="buybtn" [routerLink]="['../../menu']">Back</a>
             <br><br>
-            <img src="{{menuData.foodImg}}" width="100%">
+            <img src="{{menuData.foodImage}}" width="100%">
             <h1 class="mt-2">{{menuData.foodName}}</h1>
             <p>{{menuData.foodDetails}}</p>
             <p>{{menuData.foodPrice | currency:'INR'}}</p>
             <a class="buybtn"  *ngIf="!orderChoice" (click)="orderDetail()">Place Order</a> 
-            <!-- [routerLink]="['../../menu']" -->
         </div>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="pills-login" role="tabpanel" *ngIf="orderChoice" aria-labelledby="tab-login">
@@ -21,23 +19,25 @@
                     </li>
                   </ul>
                 <form [formGroup]="menuForm" novalidate>
-                <!-- Email input -->
+
                 <div class="form-outline mb-4">
                   <label class="form-label" for="name">Enter Your FullName</label>
                   <input type="text" id="name" class="form-control" size="50" formControlName="name"  size="50" name="name" requiredid="registerName"  />
-                  <small class="text-danger" >UserName is required</small>
+                  <span  *ngIf="name.hasError('required') && name.touched" class="error"><small class="text-danger">Username is required</small></span>  
+                  <span  *ngIf="name.hasError('pattern') && name.touched" class="error"><small class="text-danger">UserName should contain 1 uppercase with 9 characters</small></span>     
                 </div>
 
                 <div class="form-outline mb-4">
                   <label class="form-label" for="number">Enter Your Mobile</label>
                   <input type="text" id="number" class="form-control" size="50"  formControlName="phone" pattern="^\d{10}$"  required  name="phone" />
-                  <small class="text-danger">PhoneNumber is required</small>
+                  <span   *ngIf="phone.hasError('required') && phone.touched" class="error"><small class="text-danger">password is Required</small></span>  
+                  <span   *ngIf="phone.hasError('pattern') && phone.touched" class="error"><small class="text-danger">Mobile number starts with 6-9<br>Mobile Number should contain 10 digits</small></span>     
                 </div>
 
                 <div class="form-outline mb-4">
                   <label class="form-label" for="Address">Enter Your Address</label>
                     <textarea id="Address" class="form-control" size="50" formControlName="address" name="address" required></textarea>
-                    <small class="text-danger">Address is required</small>
+                    <span   *ngIf="address.hasError('required') && address.touched" class="error"><small class="text-danger">Address is Required</small></span>  
                 </div>
                   <div class="form-outline mb-4">
                     <label class="form-label" for="quantity">Quantity</label><br>
@@ -48,7 +48,7 @@
     
                   <div class="form-outline mb-4" *ngIf="menuData">
                     <label class="form-label" for="price">Price</label><br>
-                    <input #menuData.foodPrice*quantity  class="form-control" size="50"  [value]="menuData.foodPrice*quantity">
+                    <input #menuData.foodPrice*quantity  class="form-control" size="50"  [value]="menuData.foodPrice*quantity" readonly>
                   </div>
       
 

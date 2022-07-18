@@ -5,7 +5,7 @@
         <form #userForm="ngForm" >  
              
             <div class="form-group">  
-                <h3 for="website">Enter the Role:</h3>  
+                <h3 for="website">Enter the Role</h3>  
                 <select  #role="ngModel" class="form-control" name="role" [(ngModel)]="userModel.role">   
                     <option *ngFor="let data of access">{{data}}</option>  
                 </select>  

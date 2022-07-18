@@ -10,26 +10,26 @@
       <form  #userForm="ngForm">
 
         <div class="form-outline mb-4">
-          <label class="form-label" for="loginName">UserName</label>
-          <input type="text" id="loginName" #name="ngModel" class="form-control" required
-          [class.is-invalid]="name.invalid && name.touched"  name="name" [(ngModel)]="userModel.name" />
-          <small class="text-danger" [class.d-none]="name.valid || name.untouched">UserName is required</small>
-          
+          <label class="form-label" for="loginName">Email</label>
+          <input type="text" id="loginName" #email="ngModel" pattern="([a-zA-Z0-9-_\.]+)@([a-zA-Z0-9]+)\.([a-zA-Z]{2,5})(\.[a-zA-Z]{2,5})?$" class="form-control" required
+          [class.is-invalid]="email.invalid && email.touched"  name="email" [(ngModel)]="userModel.email" />
+          <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is required<br/></small>
+          <small class="text-danger" *ngIf="email.errors?.['pattern']">invalid Email format</small>
         </div>
 
         <div class="form-outline mb-4">
           <label class="form-label" for="loginPassword">Password</label>
-          <input type="password" id="loginPassword" #password="ngModel" class="form-control" required
+          <input type="password" id="loginPassword" #password="ngModel" pattern="^[A-Za-z\d]{8,}$" class="form-control" required
           [class.is-invalid]="password.invalid && password.touched" name="password" [(ngModel)]="userModel.password" />
           <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required</small>
-          
+          <small class="text-danger" *ngIf="password.errors?.['pattern']">password should contain 1 uppercase , minimum of 8 characters </small>
         </div>
   
       
         <button type="submit" mat-stroked-button size="10"  style="background-color:green;color: white;margin-left: 250px;" [disabled]="userForm.form.invalid" class="btn mb-4" (click)="login(userForm)">Sign in</button>
      
         <div class="text-center">
-          <p>Not a member? <a routerLink="../register">Register</a></p>
+          <p>Not a member? <a routerLink="../register">Register</a></p> &nbsp; <a routerLink="../forgot-password">Forgot Password</a>
         </div>
       </form>
     </div>

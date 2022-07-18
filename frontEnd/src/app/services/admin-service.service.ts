@@ -6,15 +6,15 @@ import { FormGroup, NgForm } from '@angular/forms';
   providedIn: 'root'
 })
 export class AdminServiceService {
-  readonly baseURL = 'http://localhost:3000/admins';
+  readonly baseURL = 'http://localhost:8000/admins';
   productId! :string;
   constructor(private http:HttpClient) { }
 
-  addProduct(userForm:NgForm){
-    return this.http.post(this.baseURL,userForm)
+  addProduct(userForm:FormGroup){
+    return this.http.post(this.baseURL+`/addProduct`,userForm)
   }
   getProduct(){
-    return this.http.get(this.baseURL)
+    return this.http.get(this.baseURL+`/getAllProduct`)
   }
   getOrder(){
     return this.http.get(this.baseURL+`/orderList`);
@@ -29,12 +29,16 @@ export class AdminServiceService {
   deleteProduct(_id:string){
     return this.http.delete(this.baseURL + `/${_id}`);
   }
-
+  adminLogin(userForm:NgForm){
+    return this.http.post(this.baseURL+`/login`,userForm)
+  }
+  loggedIn(){
+    return !!localStorage.getItem('token')
+  }
+  userAccess(){
+    
+  }
   postOrderDetail(userForm:FormGroup,quantity1:number,total:number,foodName:string){
-    console.log("q"+quantity1);
-    console.log("ser"+JSON.stringify(userForm));
-    
-    
     return this.http.post(this.baseURL+`/${quantity1}`+`/${total}`+`/${foodName}`,userForm);
   }
 

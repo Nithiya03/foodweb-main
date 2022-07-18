@@ -6,50 +6,54 @@ import { order } from '../pages/menupage/order';
   providedIn: 'root'
 })
 export class OrderDetailsService{
-  private userList=[]
-  readonly baseURLuser = 'http://localhost:3000/users';
-  readonly baseURL = 'http://localhost:3000/admins';
-  data : boolean = false
-  authData : boolean = false;
-  user : any ={}
+  readonly baseURLuser = 'http://localhost:8000/users';
+  readonly baseURL = 'http://localhost:8000/admins';
   role: string ="";
+  userData: any;
   constructor(private http:HttpClient) { }
 
   getAllProduct(){
-    return this.http.get(this.baseURL);
+    return this.http.get(this.baseURL+'/getAllProduct');
   }
   getProductById(_id :string){
-    console.log("service id"+_id)
     return this.http.get(this.baseURL+`/${_id}`)
   }
-  getCheck():boolean{
-    return this.data = true;
-  }
-  getChecklog(){
-    if(this.getCheck()){
-      return this.authData = true;
-    }
-    else{
-      return this.authData = false
-    }
-
-  }
-  authlog(){
-    const data = localStorage.getItem('token')
-    return data;
-  }
-
+  // getCheck():boolean{
+  //   return this.data = true;
+  // }
+  // getChecklog(){
+  //   if(this.getCheck()){
+  //     return this.authData = true;
+  //   }
+  //   else{
+  //     return this.authData = false
+  //   }
+  // }
   postUserDetail(userForm:NgForm){
-    return this.http.post(this.baseURLuser,userForm);
+    return this.http.post(this.baseURLuser+`/postUserDetail`,userForm);
   }
-  postloginDetail(username :string,password :string){
-    return this.http.get(this.baseURLuser+`/${username}`+`/${password}`)
+  postLoginDetail(userForm:NgForm){
+    return this.http.post(this.baseURLuser+`/login`,userForm);
   }
-
+  postCheckEmail(userForm:NgForm){
+    return this.http.post(this.baseURLuser+`/emailCheck`,userForm)
+  }
+  getuserEmail(email : any){
+    return this.http.get(this.baseURLuser+`/getUserEmail`,email)
+  }
+  getuserDetails(){
+    return this.http.get(this.baseURLuser+`/userDetail`)
+  }
+  // accessData(_id:string,data:any){
+  //   console.log(JSON.stringify(data));
+  //   return this.http.put(this.baseURLuser+`/${_id}`,data)
+  // }
+  update(email:string,password:string){
+    return this.http.put(this.baseURLuser+`/${email}`,password)
+  }
   getToken(){
     return localStorage.getItem('token');
   }
-
   loggedIn(){
     return !!localStorage.getItem('token')
   } 
@@ -58,9 +62,16 @@ export class OrderDetailsService{
     this.role = val;
   }
 
-  get getUser():string{
+  get getUser(){
     return this.role;
   }
 
-
+  set userEmail(val: string){
+    console.log(val);
+    
+    this.userData = val;
+  }
+  get getEmail(){
+    return this.userData
+  }
 }

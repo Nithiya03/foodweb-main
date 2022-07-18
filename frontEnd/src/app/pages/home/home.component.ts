@@ -1,3 +1,4 @@
+import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { OrderDetailsService } from 'src/app/services/order-details.service';
 
@@ -13,7 +14,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAllProduct().subscribe((res)=>{
       this.foodData = res
-      console.log(res)
+    },
+    (err)=>{
+      alert(err)
+      
     });
   }
 }

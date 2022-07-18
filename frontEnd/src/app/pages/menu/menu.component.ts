@@ -13,7 +13,10 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAllProduct().subscribe((res)=>{
       this.foodData = res
-      console.log(res)
+    },
+    (err)=>{
+      alert(err)
+      
     });
   }
 

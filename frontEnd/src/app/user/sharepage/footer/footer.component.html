@@ -1,4 +1,4 @@
-<div class="container-fluid footer mt-5">
+<div class="container-fluid footer mt-5" *ngIf="access()">
     <div  class="row">
         <!-- name -->
         <div class="col-lg-4">
@@ -6,7 +6,7 @@
             <p>Good Food, Good Eat</p>
         </div>
         <!-- nav -->
-        <div class="col-lg-4">
+        <div class="col-lg-4" >
             <a routerLink="">Home</a>
             <a routerLink="menu">Menu</a>
             <a routerLink="about">About</a>
