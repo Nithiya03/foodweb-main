@@ -26,10 +26,6 @@ export class AdminLoginComponent implements OnInit {
         else{
           this.router.navigate(['/admin'])
         }
-    },
-      (err)=>{
-        alert(err)
-        
-      })
+    })
   }
 }

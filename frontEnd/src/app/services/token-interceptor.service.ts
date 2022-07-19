@@ -21,9 +21,8 @@ export class TokenInterceptorService implements HttpInterceptor{
     })
       return next.handle(reqtoken).pipe(
         catchError((error)=>{
-          alert(error.error)
+          alert(error.error.message)
           return throwError(error);
-          
         })
       )
     }

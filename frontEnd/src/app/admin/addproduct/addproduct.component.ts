@@ -40,7 +40,7 @@ export class AddproductComponent implements OnInit {
     this._id = this.adminService.getId
     this.adminService.getproductData(this._id).subscribe(
       (res:any)=>this.editProduct(res),
-      (err:any)=>alert(err)
+      (err:any)=>alert(err.message)
     )
   }
 
@@ -57,18 +57,11 @@ export class AddproductComponent implements OnInit {
     if(!this._id){
       this.adminService.addProduct(userForm.value).subscribe((res)=>{
         alert("product added successfully");
-      },
-      (err)=>{
-        alert(err)
       })
     }
     else{
       this.adminService.updateProduct(this._id,userForm.value).subscribe((res)=>{
         alert("product updated successfully");
-      },
-      (err)=>{
-        alert(err)
-        
       })
     }
     

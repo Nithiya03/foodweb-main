@@ -13,9 +13,6 @@ router.get('/getUserEmail/:email',(req,res) => {
         if(!err){
             res.status(200).json(docs)
         }
-        else{
-            res.status(400).json({message :'User Details Not Found',docs})
-        }
     });
 }) 
 
@@ -23,9 +20,6 @@ router.get('/:_id',(req,res)=>{
     User.findOne({_id :req.params._id},(err,doc)=>{
         if(!err){
             res.status(200).json(doc)
-        }
-        else{
-            res.status(400).json({message: 'Error in retriving',doc})
         }
     })
 })

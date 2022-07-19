@@ -17,11 +17,7 @@ export class OrderDetailComponent implements OnInit {
   private getOrderDetails(){
     this.adminService.getOrder().subscribe((res)=>{  
       this.orderData = res 
-    },
-      (err)=>{
-        alert(err)
-        
-      })
+    })
   }
 
 

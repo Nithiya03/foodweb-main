@@ -26,13 +26,11 @@ export class UserDetailComponent implements OnInit {
       localStorage.setItem('access',$event.target.value)
       this.data = localStorage.getItem('access')
     if(this.data == 'permit'){
-      this.loginService.accessData(id,this.data).subscribe((res)=>{
-        console.log(res);
+      this.loginService.accessData(id,this.data).subscribe(()=>{
        })
     }
     else{
-      this.loginService.accessData(id,this.data).subscribe((res)=>{
-        console.log(res);
+      this.loginService.accessData(id,this.data).subscribe(()=>{
        })
     }    
   }

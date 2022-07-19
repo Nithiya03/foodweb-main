@@ -35,8 +35,6 @@ export class LoginComponent implements OnInit {
         window.alert("Invalid Login")
         this.router.navigate(['/login'])
       }
-    },(err)=>{
-      alert(err)
     })
   }
 }

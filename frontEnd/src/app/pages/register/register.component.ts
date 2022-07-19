@@ -17,17 +17,14 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.param.snapshot.paramMap.get('id');
-    this.service.getUserDetailById(this.userId).subscribe(
-      (res:any)=>this.editData(res),
-      (err:any)=>alert(err)
-    )
+    if(this.userId){
+      this.service.getUserDetailById(this.userId).subscribe(
+        (res:any)=>this.editData(res),
+        (err:any)=>alert(err.error.message)
+      )
+    }
   }
 
-  public update(userform : NgForm){
-    this.service.updateUser(userform.value,this.userId).subscribe((res)=>{
-      console.log(res);
-    })
-  }
   private editData(res : User){
     this.choice = true;
     this.userForm.setValue({
@@ -38,11 +35,13 @@ export class RegisterComponent implements OnInit {
       confirmPassword:res.confirmPassword
     })
   }
+  public update(userform : NgForm){
+    this.service.updateUser(userform.value,this.userId).subscribe((res)=>{
+    })
+  }
+
   public access(userForm:NgForm){
     this.service.postUserDetail(userForm.value).subscribe((res)=>{
-    },
-    (err)=>{
-      alert(err)
-    });
+    })
   }
 }

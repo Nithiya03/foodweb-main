@@ -17,10 +17,8 @@ export class ProductComponent implements OnInit {
   private getData(){
     this.adminService.getProduct().subscribe((res)=>{
       this.product = res
-    },
-    (err)=>{
-      alert(err)
-      
+    },(err)=>{
+        console.log(err);
     });
   }
   public doUpdate(_id : string){
@@ -29,12 +27,8 @@ export class ProductComponent implements OnInit {
   public doDelete(_id:string){
     if (confirm('Are you sure to delete this record ?') == true) {
 
-      this.adminService.deleteProduct(_id).subscribe((res) => {
+      this.adminService.deleteProduct(_id).subscribe(() => {
         this.getData()
-      },
-      (err)=>{
-        alert(err)
-        
       });
       }
   }

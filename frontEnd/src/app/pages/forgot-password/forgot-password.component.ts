@@ -63,9 +63,6 @@ export class ForgotPasswordComponent implements OnInit {
     if(this.passwordStatus == true){
       this.service.update(this.currentEmail,userForm.value).subscribe((res)=>{
         this.router.navigate(['/login'])
-      },(err)=>{
-        alert(err)
-        
       })
     }
     else{

@@ -34,7 +34,6 @@ export class OrderDetailsService{
   }
 
   public getUserEmail(email : any){
-    console.log(email);
     return this.http.get(this.baseURLuser+`/getUserEmail`+`/${email}`)
   }
 

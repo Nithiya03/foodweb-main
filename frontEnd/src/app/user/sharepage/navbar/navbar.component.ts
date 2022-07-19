@@ -8,7 +8,8 @@ import { OrderDetailsService } from 'src/app/services/order-details.service';
 })
 export class NavbarComponent implements OnInit {
   public accessLogin! :string|null;
-
+  // public isCollapsed = true;
+  navbarCollapsed = true;
   constructor() { }
 
   ngOnInit(): void {
@@ -17,7 +18,11 @@ export class NavbarComponent implements OnInit {
       this.logIn()
     }
   }
-  
+
+  // public toggleCollapsed():void {
+  //   this.isCollapsed = !this.isCollapsed;
+  // }
+
   public logIn(){
     return localStorage.getItem('token'); 
   }
