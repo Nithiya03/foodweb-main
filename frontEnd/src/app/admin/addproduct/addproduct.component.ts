@@ -22,6 +22,14 @@ export class AddproductComponent implements OnInit {
     })
   }
 
+  ngOnInit(): void {
+    this._id = this.adminService.getId
+    this.adminService.getproductData(this._id).subscribe(
+      (res:any)=>this.editProduct(res),
+      (err:any)=>alert(err.message)
+    )
+  }
+  
   get foodName(){
     return this.adminForm.get('foodName')
   }
@@ -35,14 +43,7 @@ export class AddproductComponent implements OnInit {
     return this.adminForm.get('foodImage')
   }
 
-  ngOnInit(): void {
-    this._id = this.adminService.getId
-    this.adminService.getproductData(this._id).subscribe(
-      (res:any)=>this.editProduct(res),
-      (err:any)=>alert(err.message)
-    )
-  }
-
+  
   private editProduct(product : ProductList ){
     this.adminForm.patchValue({
       foodName:product.foodName,

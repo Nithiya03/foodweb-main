@@ -128,7 +128,6 @@ router.post('/adminLogin',(req,res)=>{
 
 router.post('/login',async (req,res)=>{
     const admin = await Login.findOne({ name: req.body.name});
-    console.log(admin);
     if(!admin){
         return res.status(401).json('Invalid Username')
     }
