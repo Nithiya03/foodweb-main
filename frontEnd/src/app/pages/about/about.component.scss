@@ -1,21 +1,3 @@
-// .content{
-//     height: 600px;
-//     width: 800px;
-//     margin: 20px 350px;
-//     border: 1px solid;
-//     padding: 10px;
-// }
-// h1{
-//     color: black;
-//     margin-top: 5px;
-//     font-size: 30px;
-//     font-weight: bold;
-//     text-align: center;
-// }
-// .banner{
-//     margin-left: 20px;
-// }
-
 blockquote{
     border-left:none
 }
@@ -25,7 +7,6 @@ blockquote{
 }
 
 .quote-box{
-    
     overflow: hidden;
     margin-top: -50px;
     padding-top: -100px;
@@ -35,21 +16,17 @@ blockquote{
     color:white;
     width: 325px;
     box-shadow: 2px 2px 2px 2px #E0E0E0;
-    
 }
 
 .quotation-mark{
-    
     margin-top: -10px;
     font-weight: bold;
     font-size:100px;
     color:white;
     font-family: "Times New Roman", Georgia, Serif;
-    
 }
 
 .quote-text{
-    
     font-size: 19px;
     margin-top: -65px;
 }
@@ -57,9 +34,8 @@ blockquote{
 .blockquote-custom {
     position: relative;
     font-size: 1.1rem;
-  }
-  
-  .blockquote-custom-icon {
+}  
+.blockquote-custom-icon {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -69,4 +45,4 @@ blockquote{
     position: absolute;
     top: -25px;
     left: 50px;
-  }
+}

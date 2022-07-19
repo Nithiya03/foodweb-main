@@ -36,12 +36,12 @@ export class RegisterComponent implements OnInit {
     })
   }
   public update(userform : NgForm){
-    this.service.updateUser(userform.value,this.userId).subscribe((res)=>{
+    this.service.updateUser(userform.value,this.userId).subscribe(()=>{
     })
   }
 
   public access(userForm:NgForm){
-    this.service.postUserDetail(userForm.value).subscribe((res)=>{
+    this.service.postUserDetail(userForm.value).subscribe(()=>{
     })
   }
 }

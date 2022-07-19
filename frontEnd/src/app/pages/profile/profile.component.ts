@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void{
     this.userEmail = localStorage.getItem('email')
-    this.service.getUserEmail(this.userEmail).subscribe((res)=>{
+    this.service.getUserEmail(this.userEmail).subscribe((res:any)=>{
       this.data=res     
     })
 

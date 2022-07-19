@@ -70,7 +70,6 @@ export class OrderDetailsService{
   }
 
   public set userEmail(val: string){
-    console.log(val);
     localStorage.setItem('email',val)
     this.userData = val;
   }

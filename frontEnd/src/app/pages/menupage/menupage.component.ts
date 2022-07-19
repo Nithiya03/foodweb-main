@@ -24,9 +24,7 @@ export class MenupageComponent implements OnInit {
     this.menuForm = this.fb.group({
       name : new FormControl('',[Validators.required,Validators.pattern('^[[A-Z]{1}[a-z]{1,9}$')]),
       phone: new FormControl('',[Validators.required,Validators.pattern('^[6-9]{1}[0-9]{9}$')]),
-      address: new FormControl('',[Validators.required]),
-      quantity!: new FormControl('',[Validators.required]),
-      total!: new FormControl('',[Validators.required]),
+      address: new FormControl('',[Validators.required])
     })
   }
   

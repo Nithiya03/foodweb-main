@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   public login(userForm: NgForm) {
     this.service.userEmail=userForm.value['email']
-    this.service.postLoginDetail(userForm.value).subscribe((res) => {
+    this.service.postLoginDetail(userForm.value).subscribe((res:any) => {
       this.message = Object.values(res)[1]
       this.token = Object.values(res)[0]
 

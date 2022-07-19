@@ -11,7 +11,7 @@ export class MenuComponent implements OnInit {
   constructor(private service:OrderDetailsService) { }
 
   ngOnInit(): void {
-    this.service.getAllProduct().subscribe((res)=>{
+    this.service.getAllProduct().subscribe((res:any)=>{
       this.foodData = res
     })
   }

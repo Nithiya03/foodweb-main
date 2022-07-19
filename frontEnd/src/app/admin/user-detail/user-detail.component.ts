@@ -13,7 +13,7 @@ export class UserDetailComponent implements OnInit {
   constructor(private service:OrderDetailsService,private loginService:LoginService) { }
 
   ngOnInit(){
-    this.service.getuserDetails().subscribe((res)=>{
+    this.service.getuserDetails().subscribe((res:any)=>{
       this.userDetail = res
       console.log(this.userDetail);
     },

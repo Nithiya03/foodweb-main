@@ -8,28 +8,28 @@
                 </ul>
                 <form [formGroup]="adminForm" novalidate>
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="registerName">FoodName</label>
+                    <label class="form-label">FoodName</label>
                     <input type="text"  formControlName="foodName" class="form-control" name="foodName" required id="registerName"  />
                     <span  *ngIf="foodName.hasError('required') && foodName.touched" class="error"><small class="text-danger">FoodName is Required</small></span>  
                     <span  *ngIf="foodName.hasError('pattern') && foodName.touched" class="error"><small class="text-danger">Invalid pattern</small></span>    
                 </div>
                 
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="number">FoodDetail</label>
+                    <label class="form-label">FoodDetail</label>
                     <input type="text" id="number"  size="50"formControlName="foodDetail" class="form-control" required name="foodDetail"/>
                     <span  *ngIf="foodDetail.hasError('required') && foodDetail.touched" class="error"><small class="text-danger">FoodDetail is Required</small></span>                    </div>
 
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="reqQgisterEmail">FoodPrice</label>
+                    <label class="form-label">FoodPrice</label>
                     <input type="number" id="registerEmail" formControlName="foodPrice"  class="form-control" required name="foodPrice" />
                     <span  *ngIf="foodPrice.hasError('required') && foodPrice.touched" class="error"><small class="text-danger">FoodName is Required</small></span>  
                     <span  *ngIf="foodPrice.hasError('pattern') && foodPrice.touched" class="error"><small class="text-danger">Enter only numbers</small></span> 
                 </div>
             
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="registerPassword">Food Image</label>
+                    <label class="form-label">Food Image</label>
                     <input type="text" id="registerPassword" formControlName="foodImage" size="0" class="form-control"  name="foodImage" />
-                    <span  *ngIf="foodImage.hasError('required') && foodImage.touched" class="error"><small class="text-danger">FoodName is Required</small></span>                  
+                    <span  *ngIf="foodImage.hasError('required') && foodImage.touched" class="error"><small class="text-danger">FoodImage is Required</small></span>                  
                 </div>
     
                 

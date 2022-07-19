@@ -39,9 +39,6 @@ export class ForgotPasswordComponent implements OnInit {
       this.currentEmail = Object.values(userForm.value);
       this.emailCheck = Object.values(res)
 
-    },(err)=>{
-      console.log(err.error);
-      
     })
   }
 
@@ -61,7 +58,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
   public updatepassword(userForm : FormGroup){      
     if(this.passwordStatus == true){
-      this.service.update(this.currentEmail,userForm.value).subscribe((res)=>{
+      this.service.update(this.currentEmail,userForm.value).subscribe(()=>{
         this.router.navigate(['/login'])
       })
     }

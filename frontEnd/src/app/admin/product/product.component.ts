@@ -15,7 +15,7 @@ export class ProductComponent implements OnInit {
     this.getData();
   }
   private getData(){
-    this.adminService.getProduct().subscribe((res)=>{
+    this.adminService.getProduct().subscribe((res:any)=>{
       this.product = res
     },(err)=>{
         console.log(err);
