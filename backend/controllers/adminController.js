@@ -65,9 +65,9 @@ const addOrder = (req,res)=>{
         name : req.body.name,
         phone : req.body.phone,
         address: req.body.address,
-        quantity : req.params.quantity,
-        total: req.params.total,
-        foodName : req.params.foodName,
+        quantity : req.body.quantity,
+        total: req.body.total,
+        foodName : req.body.foodName,
     });
     order.save((err,doc)=> {
         if(!err){
@@ -125,6 +125,7 @@ const postLoginDetail = (req,res)=>{
 
 const adminLogin = async (req,res)=>{
     const admin = await Login.findOne({ name: req.body.name});
+    console.log(admin);
     if(!admin){
         return res.status(401).json('Invalid Username')
     }

@@ -19,9 +19,11 @@ export class AdminLoginComponent implements OnInit {
 
   adminAccess(userForm:NgForm){
     this.adminService.adminLogin(userForm.value).subscribe((res:any) => {
-        if(res){
+      console.log("valllll",res);
+      
+        if(res['message']=='true'){
           this.router.navigate(['/product'])
-          localStorage.setItem('token',this.token)
+          localStorage.setItem('token',res['token'])
         }
         else{
           this.router.navigate(['/admin'])

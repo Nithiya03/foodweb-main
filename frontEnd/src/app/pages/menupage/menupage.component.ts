@@ -19,6 +19,7 @@ export class MenupageComponent implements OnInit {
   private getMenuId:any;
   public menuData:any = [];
   public orderChoice : boolean = false;
+  public order!: object ;
 
   constructor(private param:ActivatedRoute,private service:OrderDetailsService,private fb:FormBuilder,private router:Router,private adminService:AdminServiceService) { 
     this.menuForm = this.fb.group({
@@ -70,9 +71,18 @@ export class MenupageComponent implements OnInit {
       this.quantity++;
     }
   }
-  
   public productData(userForm:FormGroup,quantity1:number,total:number){
-    this.adminService.postOrderDetail(userForm.value,quantity1,total,this.menuData['foodName']).subscribe(()=>{
+    this.order = {
+      'name':userForm.value['name'],
+      'phone':userForm.value['phone'],
+      'address':userForm.value['address'],
+      'quantity': quantity1,
+      'total':total,
+      'foodName':this.menuData['foodName']
+    }
+    console.log(this.order,userForm.value);
+    
+    this.adminService.postOrderDetail(this.order).subscribe(()=>{
     })
   }
 

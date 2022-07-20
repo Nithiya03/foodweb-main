@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   public accessLogin! :string|null;
-  constructor() { }
+  url: string = 'http://localhost:4200/';
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
     const data = localStorage.getItem('token')
@@ -28,7 +30,7 @@ export class NavbarComponent implements OnInit {
 
   public accessuser(){
     this.accessLogin = localStorage.getItem('role')
-    if(this.accessLogin == 'user'){
+    if(this.accessLogin == 'user' && this.url != window.location.href ){
       return true;
     }
     else{
@@ -37,7 +39,7 @@ export class NavbarComponent implements OnInit {
   }
   public accessadmin(){
     this.accessLogin = localStorage.getItem('role')
-    if(this.accessLogin == 'admin'){
+    if(this.accessLogin == 'admin' && this.url != window.location.href){
       return true;
     }
     else{

@@ -9,6 +9,9 @@ const getUserEmail = (req,res) => {
         if(!err){
             res.status(200).json(docs)
         }
+        else{
+            res.status(400).json({message: 'Error in retriving user email'})
+        }
     })
 }
 
@@ -16,6 +19,9 @@ const getUserById = (req,res)=>{
     User.findOne({_id :req.params._id},(err,doc)=>{
         if(!err){
             res.status(200).json(doc)
+        }
+        else{
+            res.status(400).json({message: 'Error in retriving user detail'})
         }
     })
 }
@@ -53,12 +59,12 @@ const postUserDetail = async (req,res)=>{
         })
     }
     else{
-        res.status(400).json('user already exist')
+        res.status(400).json({message:'user already exist'})
     }
 }
 
 const updateUseraccess = (req,res)=>{
-    
+
     if(req.body.access == 'permit'){
         const user = {
             access : true

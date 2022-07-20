@@ -44,7 +44,7 @@ export class AdminServiceService {
     return !!localStorage.getItem('token')
   }
 
-  public postOrderDetail(userForm:FormGroup,quantity1:number,total:number,foodName:string){
-    return this.http.post(this.baseURL+`/${quantity1}`+`/${total}`+`/${foodName}`,userForm);
+  public postOrderDetail(userForm:object){
+    return this.http.post(this.baseURL+`/orders`,userForm);
   }
 }

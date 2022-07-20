@@ -13,7 +13,7 @@ export class TokenInterceptorService implements HttpInterceptor{
   constructor(private orderData:OrderDetailsService, private injector:Injector, private router:Router) { }
 
   intercept(req:HttpRequest<any>, next:HttpHandler) {
-    let injectorService=this.injector.get(OrderDetailsService)
+    let injectorService=this.injector.get(OrderDetailsService)    
     let reqtoken=req.clone({
       setHeaders:{
         Authorization : `Bearer ${injectorService.getToken()}`
