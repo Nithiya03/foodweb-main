@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
-const books = require('../models/user')
 
 exports.isAuthenticatedUser = async( req , res, next)=>{
     if(!req.headers.authorization){
