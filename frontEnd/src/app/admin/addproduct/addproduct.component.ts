@@ -9,11 +9,11 @@ import { ProductList } from '../addproduct/productlist'
   styleUrls: ['./addproduct.component.scss']
 })
 export class AddproductComponent implements OnInit {
-
+  public choice : boolean = false;
   public adminForm:FormGroup | any;
-  public _id!:string;
+  public _id!:string | any;
 
-  constructor(private adminService:AdminServiceService,private fb:FormBuilder) { 
+  constructor(private adminService:AdminServiceService,private fb:FormBuilder,private param:ActivatedRoute) { 
     this.adminForm = this.fb.group({
       foodName : new FormControl('',[Validators.required,Validators.pattern("^[A-Za-z0-9 -]{7,}$")]),
       foodDetail:new FormControl('',[Validators.required]),
@@ -23,13 +23,13 @@ export class AddproductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._id = this.adminService.getId
-    this.adminService.getproductData(this._id).subscribe(
-      (res:any)=>this.editProduct(res),
-      (err:any)=>alert(err.message)
-    )
+    this._id = this.param.snapshot.paramMap.get('id');
+    if(this._id){
+      this.adminService.getproductData(this._id).subscribe(
+        (res:any)=>this.editProduct(res)
+      )}
   }
-  
+
   get foodName(){
     return this.adminForm.get('foodName')
   }
@@ -45,6 +45,7 @@ export class AddproductComponent implements OnInit {
 
   
   private editProduct(product : ProductList ){
+    this.choice = true;
     this.adminForm.patchValue({
       foodName:product.foodName,
       foodDetail:product.foodDetail,
@@ -53,18 +54,16 @@ export class AddproductComponent implements OnInit {
     })
   }
 
+  public update(userForm:FormGroup){
+    this.adminService.updateProduct(this._id,userForm.value).subscribe(()=>{
+      alert("product updated successfully");
+    })
+  }
+
   public add(userForm:FormGroup){
-    if(!this._id){
       this.adminService.addProduct(userForm.value).subscribe(()=>{
         alert("product added successfully");
       })
-    }
-    else{
-      this.adminService.updateProduct(this._id,userForm.value).subscribe(()=>{
-        alert("product updated successfully");
-      })
-    }
-    
   }
 
 }

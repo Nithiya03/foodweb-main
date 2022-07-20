@@ -35,35 +35,33 @@ export class ForgotPasswordComponent implements OnInit {
     return this.userForm.get('password')
   }
   public checkEmail(userForm:NgForm){
-    this.service.postCheckEmail(userForm.value).subscribe((res)=>{
-      this.currentEmail = Object.values(userForm.value);
-      this.emailCheck = Object.values(res)
-
+    this.service.postCheckEmail(userForm.value).subscribe((res:any)=>{  
+      this.currentEmail = userForm.value['email']
+      this.emailCheck = res['message']
+    },(err)=>{
+      alert(err.error.message)
     })
   }
 
-  public validation(userForm : FormGroup){
-     this.newPassword = Object.values(userForm.value)[0]
-     this.cPassword = Object.values(userForm.value)[1]
+  public validation(userForm : FormGroup){    
+     this.newPassword = userForm.value['password']
+     this.cPassword = userForm.value['confirmPassword']
     if(this.newPassword != this.cPassword){
       alert("password mismatch")
     }
     else if(this.newPassword == this.cPassword){
       this.passwordStatus = true;
-      alert("password changed successfully")
     }
     else if(this.newPassword == null && this.cPassword == null) {
-      alert("the field cannot be null")
+      alert("the field cannot be empty")
     }
   }
-  public updatepassword(userForm : FormGroup){      
+  public updatepassword(userForm:FormGroup){      
     if(this.passwordStatus == true){
       this.service.update(this.currentEmail,userForm.value).subscribe(()=>{
+        alert("password updated")
         this.router.navigate(['/login'])
       })
-    }
-    else{
-      alert("password Not Updated")
     }
   }
 }

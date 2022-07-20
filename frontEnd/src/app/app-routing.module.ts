@@ -21,6 +21,8 @@ import { RoleComponent } from './role/role.component';
 const routes: Routes = [
   {path:'',component:RoleComponent},
   {path:'home',component:HomeComponent},
+  {path:'about',component:AboutComponent},
+  {path:'login',component:LoginComponent},
   {path:'product',component:ProductComponent,canActivate:[AdminAuthenticationGuard]},
   {path:'userDetail',component:UserDetailComponent,canActivate:[AdminAuthenticationGuard]},
   {path:'orderDetail',component:OrderDetailComponent,canActivate:[AdminAuthenticationGuard]},
@@ -32,8 +34,6 @@ const routes: Routes = [
   {path:'menu',component:MenuComponent},
   {path:'admin',component:AdminLoginComponent},
   {path:'menu/:id',component:MenupageComponent,canActivate:[AuthguardGuard]},
-  {path:'about',component:AboutComponent},
-  {path:'login',component:LoginComponent},
   {path:'order',component:FinalPageComponent,canActivate:[AuthguardGuard]},
   {path:'forgot-password',component:ForgotPasswordComponent},
   {path:'**',component:RoleComponent}

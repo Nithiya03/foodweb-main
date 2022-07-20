@@ -11,25 +11,27 @@ import { AdminServiceService } from 'src/app/services/admin-service.service';
 export class ProductComponent implements OnInit {
   public product : any = [];
   constructor(private router:Router,private adminService:AdminServiceService) { }
+
   ngOnInit(): void {
     this.getData();
   }
+
   private getData(){
     this.adminService.getProduct().subscribe((res:any)=>{
       this.product = res
-    },(err)=>{
-        console.log(err);
     });
   }
+
   public doUpdate(_id : string){
-    this.adminService.setId = _id
+    this.getData();
   }
+
   public doDelete(_id:string){
     if (confirm('Are you sure to delete this record ?') == true) {
 
       this.adminService.deleteProduct(_id).subscribe(() => {
-        this.getData()
       });
+      this.getData()
       }
   }
 }

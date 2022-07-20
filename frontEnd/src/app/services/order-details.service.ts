@@ -46,7 +46,7 @@ export class OrderDetailsService{
   }
 
   public update(email:string,password:string){
-    return this.http.put(this.baseURLuser+`/${email}`,password)
+    return this.http.put(this.baseURLuser+`/editpassword`+`/${email}`,password)
   }
 
   public updateUser(userform : NgForm,id : string){

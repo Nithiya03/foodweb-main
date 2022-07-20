@@ -47,12 +47,4 @@ export class AdminServiceService {
   public postOrderDetail(userForm:FormGroup,quantity1:number,total:number,foodName:string){
     return this.http.post(this.baseURL+`/${quantity1}`+`/${total}`+`/${foodName}`,userForm);
   }
-
-  public set setId(_id : string){
-    this.productId = _id;
-  }
-
-  public get getId(){
-    return this.productId;
-  }
 }

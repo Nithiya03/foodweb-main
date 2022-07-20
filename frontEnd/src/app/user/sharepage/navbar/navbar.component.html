@@ -20,7 +20,7 @@
         <div class="navbar-collapse collapse dual-collapse2 order-2 order-md-2" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a  class="nav-link active" *ngIf="!logIn()" routerLink="login" routerLinkActive="active-link" ><i class="bi bi-box-arrow-in-right"></i>Login</a>
+              <a  class="nav-link active" *ngIf="!logIn()" [routerLink]="['login']" routerLinkActive="active-link" ><i class="bi bi-box-arrow-in-right"></i>Login</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="register" *ngIf="!logIn()"  routerLinkActive="active-link"><i class="bi bi-person-circle"></i>Register</a>

@@ -1,31 +1,30 @@
 <div class="container">
   <div class="tab-content">
-    <div class="tab-pane fade show active" id="pills-login" role="tabpanel">
-        <ul class="nav mb-3" size="10" id="ex1">
+    <div class="tab-pane fade show active">
+        <ul class="nav mb-3">
             <li class="nav-item" role="presentation">
-              <a class="nav-link active" id="tab-login" style="background-color:green;color: white;margin-left: 250px;" role="tab" aria-selected="true">Login</a>
+              <a class="nav-link active" id="tab-login" style="background-color:green;color: white;margin-left: 300px;" role="tab" aria-selected="true">Login</a>
             </li>
           </ul>
       <form  #userForm="ngForm">
-
         <div class="form-outline mb-4">
           <label class="form-label" for="loginName">Email</label>
-          <input type="text" id="loginName" #email="ngModel" pattern="([a-zA-Z0-9-_\.]+)@([a-zA-Z0-9]+)\.([a-zA-Z]{2,5})(\.[a-zA-Z]{2,5})?$" class="form-control" required
+          <input type="text" id="loginName" #email="ngModel" pattern="([a-z0-9-_\.]+)@([a-z0-9]+)\.([a-z]{2,5})(\.[a-z]{2,5})?$" class="form-control" required
           [class.is-invalid]="email.invalid && email.touched"  name="email" [(ngModel)]="userModel.email" />
-          <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is required<br/></small>
-          <small class="text-danger" *ngIf="email.errors?.['pattern']">invalid Email format</small>
+          <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is required</small><br>
+          <small class="text-danger" *ngIf="email.errors?.['pattern']">invalid Email <br> Email should not contain uppercase</small>
         </div>
 
         <div class="form-outline mb-4">
           <label class="form-label" for="loginPassword">Password</label>
           <input type="password" id="loginPassword" #password="ngModel" pattern="^[A-Za-z\d]{8,}$" class="form-control" required
           [class.is-invalid]="password.invalid && password.touched" name="password" [(ngModel)]="userModel.password" />
-          <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required</small>
-          <small class="text-danger" *ngIf="password.errors?.['pattern']">password should contain 1 uppercase , minimum of 8 characters </small>
+          <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required</small><br>
+          <small class="text-danger" *ngIf="password.errors?.['pattern']">password should contain 1 uppercase with 8 characters with no special characters</small>
         </div>
   
       
-        <button type="submit" mat-stroked-button size="10"  style="background-color:green;color: white;margin-left: 250px;" [disabled]="userForm.form.invalid" class="btn mb-4" (click)="login(userForm)">Sign in</button>
+        <button type="submit" mat-stroked-button size="10"  style="background-color:green;color: white;margin-left: 300px;" [disabled]="userForm.form.invalid" class="btn mb-4" (click)="login(userForm)">Sign in</button>
      
         <div class="text-center">
           <p>Not a member? <a routerLink="../register">Register</a></p> &nbsp; <a routerLink="../forgot-password">Forgot Password</a>

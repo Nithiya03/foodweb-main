@@ -1,30 +1,26 @@
-const express = require('express');
 const jwt=require('jsonwebtoken');
 const bcrypt = require('bcryptjs')
-const nodemailer = require('nodemailer')
-var router = express.Router();
 require('dotenv').config();
-var {isAuthenticatedUser} = require('../middleware/auth')
 
 var { User } = require('../models/user')
 
-router.get('/getUserEmail/:email',(req,res) => {
+const getUserEmail = (req,res) => {
     User.findOne({ email: req.params.email},(err,docs) => {
         if(!err){
             res.status(200).json(docs)
         }
-    });
-}) 
+    })
+}
 
-router.get('/:_id',(req,res)=>{
+const getUserById = (req,res)=>{
     User.findOne({_id :req.params._id},(err,doc)=>{
         if(!err){
             res.status(200).json(doc)
         }
     })
-})
+}
 
-router.get('/userDetail/data',(req,res) => {
+const getAllUser = (req,res) => {
 
     User.find((err,doc)=>{
         if(!err){
@@ -34,10 +30,10 @@ router.get('/userDetail/data',(req,res) => {
             res.status(400).json({message: 'Error in retriving user detail',doc})
         }
     })
-})
+}
    
 
-router.post('/postUserDetail',async (req,res)=>{
+const postUserDetail = async (req,res)=>{
     const hashedPassword = bcrypt.hashSync(req.body.password,12)
     var user = new User({
         name: req.body.name,
@@ -59,10 +55,10 @@ router.post('/postUserDetail',async (req,res)=>{
     else{
         res.status(400).json('user already exist')
     }
-});
+}
 
-router.post('/updateUser/:id',(req,res)=>{
-    console.log(req.body);
+const updateUseraccess = (req,res)=>{
+    
     if(req.body.access == 'permit'){
         const user = {
             access : true
@@ -86,9 +82,9 @@ router.post('/updateUser/:id',(req,res)=>{
                 res.status(404).json('User Not Found')
         })
     }
-})
+}
 
-router.post('/login',async(req,res)=>{
+const userLogin = async(req,res)=>{
     const user = await User.findOne({ email: req.body.email});
     if(!user){
         return res.status(401).json({message:'Invalid email or password'})
@@ -108,9 +104,9 @@ router.post('/login',async(req,res)=>{
             }
             
     }
-});
+}
 
-router.post('/emailCheck',async(req,res)=>{
+const checkEmail = async(req,res)=>{
     const user = await User.findOne({ email: req.body.email });
     if(!user){
         return res.status(401).json({message:'Invalid Email'})
@@ -118,9 +114,9 @@ router.post('/emailCheck',async(req,res)=>{
     else{
         res.status(200).json({message:'true'});
     }
-});
+}
 
-router.put('/:_id',(req,res)=>{
+const updateUser = (req,res)=>{
     const user = {
         name    : req.body.name,
         email   : req.body.email,
@@ -130,12 +126,12 @@ router.put('/:_id',(req,res)=>{
         if(!err){
             res.status(200).json(data)
         }else{
-            res.status(400).json({message:'User Not Found',data})
+            res.status(400).json({message:'User detail not updated',data})
         }
     })
-})
+}
 
-router.put('/:email',(req,res)=>{
+const updatePassword =(req,res)=>{
     const hashedPassword = bcrypt.hashSync(req.body.password,12)
     var user ={
         password :hashedPassword,
@@ -145,9 +141,8 @@ router.put('/:email',(req,res)=>{
             res.status(200).json(data)
         }
         else
-            res.status(400).json({message:'User Not Found',data})
+            res.status(400).json({message:'User password not updated',data})
     })
-})
+}
 
-module.exports = router;
-
+module.exports = {getUserEmail,getUserById,getAllUser,postUserDetail,updateUseraccess,userLogin,checkEmail,updateUser,updatePassword}

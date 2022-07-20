@@ -1,26 +1,23 @@
-const express = require('express');
 const jwt=require('jsonwebtoken');
-var router = express.Router();
 const bcrypt = require('bcryptjs')
 require('dotenv').config();
 var ObjectId = require('mongoose').Types.ObjectId;
-
 var { Admin } = require('../models/admin')
 var { Order } = require('../models/order')
 var { Login } = require('../models/login')
 
-router.get('/getAllProduct',(req,res) => {
+const getAllProduct = (req,res) => {
     Admin.find((err,docs) => {
         if(!err){
             res.status(200).json(docs)
         }
         else{
-            res.status(400).json({message:'Admin Not Found',docs})
+            res.status(400).json({message:'Error in retriving products',docs})
         }
     });
-}) 
+}
 
-router.get('/orderList',(req,res) => {
+const orderList = (req,res) => {
     Order.find((err,docs) => {
         if(!err){
             res.status(200).json(docs)
@@ -29,9 +26,9 @@ router.get('/orderList',(req,res) => {
             res.status(400).json({message:'Error in retriving orderlist',docs})
         }
     });
-}) 
+}
 
-router.get('/:id',(req,res)=>{
+const getProductId = (req,res)=>{
     if(!ObjectId.isValid(req.params.id)){
         return res.status(400).send(`No records with given id: ${req.params.id}`)
     }
@@ -43,9 +40,9 @@ router.get('/:id',(req,res)=>{
            res.status(400).json({message:'Error in retriving product',doc})
         }
     })
-})
+}
 
-router.post('/addProduct',(req,res)=>{
+const addProduct = (req,res)=>{
     console.log(req.body);
     var admin = new Admin({
         foodName : req.body.foodName,
@@ -61,9 +58,9 @@ router.post('/addProduct',(req,res)=>{
            res.status(400).json({message:'Error in storing products',doc})
         }
     })
-});
+}
 
-router.post('/:quantity/:total/:foodName',(req,res)=>{
+const addOrder = (req,res)=>{
     let order = new Order({
         name : req.body.name,
         phone : req.body.phone,
@@ -80,9 +77,9 @@ router.post('/:quantity/:total/:foodName',(req,res)=>{
             res.status(400).json({message:'Error in posting order detail',doc})
         }
     })
-});
+}
 
-router.put('/:id',(req,res)=>{
+const updateProduct = (req,res)=>{
     if(!ObjectId.isValid(req.params.id)){
         return res.status(400).send(`No record with the given id : $(req.params.id)`);
     }
@@ -99,9 +96,9 @@ router.put('/:id',(req,res)=>{
         else
             res.status(400).json({message:'Error in updating products',data})
     });
-})
+}
 
-router.delete('/:id',(req,res)=>{
+const deleteProduct = (req,res)=>{
     if(!ObjectId.isValid(req.params.id))
         return res.status(400).json(`No record with the given id : $(req.params.id)`);
     Admin.findByIdAndRemove(req.params.id,(err,data)=>{
@@ -110,9 +107,9 @@ router.delete('/:id',(req,res)=>{
     else
         res.status(400).json({message:'Error in deleting product',data})
 });
-})
+}
 
-router.post('/adminLogin',(req,res)=>{
+const postLoginDetail = (req,res)=>{
     const hashedPassword = bcrypt.hashSync(req.body.password,12)
     var login = new Login({
         name : req.body.name,
@@ -124,9 +121,9 @@ router.post('/adminLogin',(req,res)=>{
         else
             res.status(400).json({message:'Error in storing admin details',doc})
 });
-})
+}
 
-router.post('/login',async (req,res)=>{
+const adminLogin = async (req,res)=>{
     const admin = await Login.findOne({ name: req.body.name});
     if(!admin){
         return res.status(401).json('Invalid Username')
@@ -142,7 +139,7 @@ router.post('/login',async (req,res)=>{
             res.status(200).json({token,message:'true'});
         }
     }
-});
+}
 
 
-module.exports = router;
+module.exports = {getAllProduct,orderList,getProductId,addProduct,addOrder,updateProduct,deleteProduct,postLoginDetail,adminLogin}

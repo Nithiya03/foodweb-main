@@ -3,10 +3,10 @@
         <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                 <ul class="nav  mb-3" id="ex1" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="tab-login"style="background-color:green;color: white;margin-left: 200px;" *ngIf="!choice" role="tab" aria-selected="true">Register</a>
+                        <a class="nav-link active" id="tab-login"style="background-color:green;color: white;margin-left: 250px;" *ngIf="!choice" role="tab" aria-selected="true">Register</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="tab-login"style="background-color:green;color: white;margin-left: 200px;" *ngIf="choice" role="tab" aria-selected="true">Edit Profile</a>
+                        <a class="nav-link active" id="tab-login"style="background-color:green;color: white;margin-left: 250px;" *ngIf="choice" role="tab" aria-selected="true">Edit Profile</a>
                     </li>
                 </ul>
                 <form #userForm="ngForm" novalidate>
@@ -14,35 +14,35 @@
                     <label class="form-label" for="registerName">UserName</label>
                     <input type="text"  #name="ngModel" pattern="^[[A-Z]{1}[a-z]{5,10}$" class="form-control" [class.is-invalid]="name.invalid && name.touched" name="name" [(ngModel)]="userModel.name" required id="registerName"  />
                     <small class="text-danger"  [class.d-none]="name.valid || name.untouched">UserName is required</small><br>
-                    <small class="text-danger" *ngIf="name.errors?.['pattern']">UserName should contain 1 alphabet <br/> followed by [5-10] lowecase</small>
+                    <small class="text-danger" *ngIf="name.errors?.['pattern']">UserName should contain 1 uppercase <br/> followed by [5-10] lowecase</small>
                 </div>
                 
                 <div class="form-outline mb-4">
                     <label class="form-label" for="number">Mobile</label>
                     <input type="text" id="number"  size="50" #mobile="ngModel" pattern="^[6-9]{1}[0-9]{9}$" class="form-control" required
                     [class.is-invalid]="mobile.invalid && mobile.touched" name="mobile" [(ngModel)]="userModel.mobile" />
-                    <small class="text-danger" [class.d-none]="mobile.valid || mobile.untouched">PhoneNumber is required</small>
+                    <small class="text-danger" [class.d-none]="mobile.valid || mobile.untouched">PhoneNumber is required</small><br>
                     <small class="text-danger" *ngIf="mobile.errors?.['pattern']">MobileNumber should starts with [6-9] followed 9 digits</small>
                   </div>
 
                 <div class="form-outline mb-4">
                     <label class="form-label" for="registerEmail">Email</label>
-                    <input type="email" id="registerEmail" #email="ngModel" pattern="([a-zA-Z0-9-_\.]+)@([a-zA-Z0-9]+)\.([a-zA-Z]{2,5})(\.[a-zA-Z]{2,5})?$" class="form-control" required
+                    <input type="email" id="registerEmail" #email="ngModel" pattern="([a-z0-9-_\.]+)@([a-z0-9]+)\.([a-z]{2,5})(\.[a-z]{2,5})?$" class="form-control" required
                     [class.is-invalid]="email.invalid && email.touched"  name="email" [(ngModel)]="userModel.email" />
-                    <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is required</small>
-                    <small class="text-danger" *ngIf="email.errors?.['pattern']">invalid Email format</small>
+                    <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is required</small><br>
+                    <small class="text-danger" *ngIf="email.errors?.['pattern']">invalid Email format <br> Email should not contain uppercase</small>
                 </div>
             
                 <div class="form-outline mb-4" *ngIf="!choice">
                     <label class="form-label" for="registerPassword">Password</label>
                     <input type="password" id="registerPassword"  #password="ngModel" pattern="^([A-Z]{1})[A-Za-z\d]{7}$" class="form-control" [class.is-invalid]="password.invalid && password.touched" name="password" [(ngModel)]="userModel.password" />
                     <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required</small>
-                    <small class="text-danger" *ngIf="password.errors?.['pattern']">password should contain 1 uppercase , minimum of 8 characters </small>
+                    <small class="text-danger" *ngIf="password.errors?.['pattern']">password should contain 1 uppercase with 8 characters with no special characters</small>
                 </div>
     
                 
-                <button type="submit"  style="background-color:green;color: white;margin-left: 200px;" [disabled]="userForm.form.invalid" class="btn mb-3" routerLink="../login" (click)="access(userForm)" *ngIf="!choice">Sign in</button>
-                <button type="submit"  style="background-color:green;color: white;margin-left: 200px;" [disabled]="userForm.form.invalid" class="btn mb-3" routerLink="/profile" (click)="update(userForm)" *ngIf="choice">Update</button>&nbsp;
+                <button type="submit"  style="background-color:green;color: white;margin-left: 250px;" [disabled]="userForm.form.invalid" class="btn mb-3" routerLink="../login" (click)="access(userForm)" *ngIf="!choice">Sign in</button>
+                <button type="submit"  style="background-color:green;color: white;margin-left: 250px;" [disabled]="userForm.form.invalid" class="btn mb-3" routerLink="/profile" (click)="update(userForm)" *ngIf="choice">Update</button>&nbsp;
                 <button   style="background-color:green;color:white" class="btn mb-3" routerLink="/profile"  *ngIf="choice">cancel</button>
                 <div class="text-center" *ngIf="!choice">
                     <p>Already a user ?<a routerLink="../login">Login</a></p>
