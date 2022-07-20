@@ -7,15 +7,15 @@ import { ProductComponent } from './admin/product/product.component';
 import { UserDetailComponent } from './admin/user-detail/user-detail.component';
 import { AdminAuthenticationGuard } from './authguard/admin-authentication.guard';
 import { AuthguardGuard } from './authguard/authguard.guard';
-import { AboutComponent } from './pages/about/about.component';
-import { FinalPageComponent } from './pages/final-page/final-page.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
-import { MenuComponent } from './pages/menu/menu.component';
-import { MenupageComponent } from './pages/menupage/menupage.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { RegisterComponent } from './pages/register/register.component';
+import { AboutComponent } from './userPages/about/about.component';
+import { FinalPageComponent } from './userPages/final-page/final-page.component';
+import { ForgotPasswordComponent } from './userPages/forgot-password/forgot-password.component';
+import { HomeComponent } from './userPages/home/home.component';
+import { LoginComponent } from './userPages/login/login.component';
+import { MenuComponent } from './userPages/menu/menu.component';
+import { MenupageComponent } from './userPages/menupage/menupage.component';
+import { ProfileComponent } from './userPages/profile/profile.component';
+import { RegisterComponent } from './userPages/register/register.component';
 import { RoleComponent } from './role/role.component';
 
 const routes: Routes = [
