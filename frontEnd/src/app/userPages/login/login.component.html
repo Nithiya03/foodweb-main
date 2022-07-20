@@ -9,17 +9,17 @@
       <form  #userForm="ngForm">
         <div class="form-outline mb-4">
           <label class="form-label" for="loginName">Email</label>
-          <input type="text" id="loginName" #email="ngModel" pattern="([a-z0-9-_\.]+)@([a-z0-9]+)\.([a-z]{2,5})(\.[a-z]{2,5})?$" class="form-control" required
+          <input type="text" id="loginName" #email="ngModel" pattern="([a-z0-9-_\.]+)@([a-z0-9]+)\.([a-z]{2,5})(\.[a-z]{2,5})?$"  [class.is-invalid]="email.invalid && email.touched"class="form-control" required
           [class.is-invalid]="email.invalid && email.touched"  name="email" [(ngModel)]="userModel.email" />
-          <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is required</small><br>
+          <small class="text-danger" *ngIf="email.errors?.['required']" [class.d-none]="email.untouched">Email is required</small><br>
           <small class="text-danger" *ngIf="email.errors?.['pattern']">invalid Email <br> Email should not contain uppercase</small>
         </div>
 
         <div class="form-outline mb-4">
           <label class="form-label" for="loginPassword">Password</label>
-          <input type="password" id="loginPassword" #password="ngModel" pattern="^[A-Za-z\d]{8,}$" class="form-control" required
+          <input type="password" id="loginPassword" #password="ngModel" pattern="^[A-Za-z\d]{8,}$" class="form-control" [class.is-invalid]="password.invalid && password.touched" required
           [class.is-invalid]="password.invalid && password.touched" name="password" [(ngModel)]="userModel.password" />
-          <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required</small><br>
+          <small class="text-danger" *ngIf="password.errors?.['required']" [class.d-none]=" password.untouched">Password is required</small><br>
           <small class="text-danger" *ngIf="password.errors?.['pattern']">password should contain 1 uppercase with 8 characters with no special characters</small>
         </div>
   
