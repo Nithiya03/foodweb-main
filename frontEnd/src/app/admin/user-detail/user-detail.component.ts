@@ -16,9 +16,6 @@ export class UserDetailComponent implements OnInit {
     this.service.getuserDetails().subscribe((res:any)=>{
       this.userDetail = res
       console.log(this.userDetail);
-    },
-    (err)=>{
-      alert(err)
     })
   }
   

@@ -10,7 +10,6 @@ export class LoginService {
   readonly baseURLlogin = 'http://localhost:8000/users';
    
   public accessData(_id:string,access:any){
-    console.log(access);
     let data ={
       "access" : access
     }

@@ -11,7 +11,6 @@ import {Admin} from '../admin-login/admin'
 })
 export class AdminLoginComponent implements OnInit {
   public userModel = new Admin();
-  private token!: string;
   constructor(private router:Router,private adminService:AdminServiceService) { }
 
   ngOnInit(): void {
@@ -19,8 +18,6 @@ export class AdminLoginComponent implements OnInit {
 
   adminAccess(userForm:NgForm){
     this.adminService.adminLogin(userForm.value).subscribe((res:any) => {
-      console.log("valllll",res);
-      
         if(res['message']=='true'){
           this.router.navigate(['/product'])
           localStorage.setItem('token',res['token'])
@@ -28,9 +25,6 @@ export class AdminLoginComponent implements OnInit {
         else{
           this.router.navigate(['/admin'])
         }
-    },(err)=>{
-      alert(err.error.message);
-      this.router.navigate(['/admin'])
     })
   }
 }

@@ -30,8 +30,8 @@ export class ProductComponent implements OnInit {
     if (confirm('Are you sure to delete this record ?') == true) {
 
       this.adminService.deleteProduct(_id).subscribe(() => {
+        this.getData()
       });
-      this.getData()
       }
   }
 }
